@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useRef, useMemo, useCallback } from 'react';
 import { Text, View, StyleSheet, Image, Button } from 'react-native';
+import { useAsyncStorage } from '@react-native-async-storage/async-storage';
 
 import { AxiosResponse } from 'axios';
 import { BarCodeScanner } from 'expo-barcode-scanner';
@@ -21,7 +22,7 @@ interface scannedProps {
 const DropDown = (props: any) => {
   let errorImg = 'https://www.batirama.com/scaled/983/755/1/2017/08/31/125459/images/article/15082-_00erreur.jpg';
 
-  return(
+  return (
     <BottomSheetModal
       ref={props.bottomSheetModalRef}
       snapPoints={props.snapPoints}
@@ -48,7 +49,6 @@ const DropDown = (props: any) => {
 
 //Fonction Principal Scan
 export const Scan = () => {
-  //creation des state hasPermission, scanned, productData.
   const [hasPermission, setHasPermission] = useState(null);
   const [scanned, setScanned] = useState(false);
   const [productData, setProductData] = useState<Product>();
@@ -56,10 +56,20 @@ export const Scan = () => {
   const bottomSheetModalRef = useRef<BottomSheetModal>(null);
   const snapPoints = useMemo(() => ['30%'], []);
 
+  //async-storage (stockage des code barre sparer de ','. historique)
+  const { getItem, setItem } = useAsyncStorage('@storageHistory4');
+  const setStorageHistory = async (data: any) => {
+    const item = await getItem();
+    if (item?.slice(item?.length - 13, item?.length) != data)
+      await setItem(item + ' ' + data);
+  };
+  /////////////////////////////////////////////////////////////////////
+
   useEffect(() => {
     getBarCodeScannerPermissions();
   }, []);
-  
+
+
   const getBarCodeScannerPermissions = async () => {
     const { status } = await BarCodeScanner.requestPermissionsAsync();
     setHasPermission(status == 'granted');
@@ -69,7 +79,6 @@ export const Scan = () => {
     bottomSheetModalRef.current?.present();
   }, []);
   
-  //recup les donner de l'api en fonction du code bar scannee
   const getProductInfos = async (data: string) => {
     setScanned(true);
     await getProductCode(data)
@@ -82,22 +91,21 @@ export const Scan = () => {
       });
   };
 
-  const handleBarCodeScanned = async ({ type, data }: scannedProps) => {
+  const handleBarCodeScanned = async ({ type, data}: scannedProps) => {
     setScanned(true);
     getProductInfos(data);
+    setStorageHistory(data); //storage
   };
 
   const handleSheetChange = useCallback((index: number) => {
     setScanned(false);
   }, []);
 
-  //verifie si il y as pas un probleme de permission
   if (hasPermission === null)
     return <Text>Requesting for camera permission</Text>;
   if (hasPermission === false)
     return <Text>No access to camera</Text>;
 
-  //retourne le rendu
   return (
     <View style={styles.container}>
         <BarCodeScanner
@@ -107,16 +115,14 @@ export const Scan = () => {
         {productData && (
           <View style={styles.sheetContainer}>
             <BottomSheetModalProvider>
-                <DropDown //quand il y as une detection de code bar ca lance le menu
+                <DropDown
                   bottomSheetModalRef={bottomSheetModalRef}
                   snapPoints={snapPoints}
                   handleSheetChange={handleSheetChange}
                   productData={productData}
                 />
             </BottomSheetModalProvider>
-
             <View style={styles.recScan} />
-
           </View>
         )}
     </View>

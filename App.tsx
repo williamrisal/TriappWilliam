@@ -5,7 +5,7 @@ import { NavigationContainer } from '@react-navigation/native';
 import Ionicons from '@expo/vector-icons/Ionicons';
 
 import { Scan } from './App/Component/Screens/Scan';
-import { History } from './App/Component/Screens/History';
+import { History } from './App/Component/Screens/History/History';
 import { Footer } from './App/Component/Screens/Footer';
 import { useState } from 'react';
 

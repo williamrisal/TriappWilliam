@@ -16,10 +16,7 @@ export const Footer = (props: any) => {
   			onPress={() => props.setValue(1)} title="1" //scan
 		/>
 		<Button
-  			onPress={() => props.setValue(2)} title="2"
-		/>
-		<Button
-  			onPress={() => props.setValue(3)} title="3"
+  			onPress={() => props.setValue(2)} title="2" //point
 		/>
 	</View>
   );

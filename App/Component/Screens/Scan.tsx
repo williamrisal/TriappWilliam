@@ -11,7 +11,6 @@ import { Product } from '../Models/ProductInfo';
 import { getProductCode } from '../Services/getProductCode';
 
 import styles from '../../Style/Scan.style';
-import bottomSheet from '@gorhom/bottom-sheet/lib/typescript/components/bottomSheet';
 
 interface scannedProps {
   type: string;
@@ -56,12 +55,19 @@ export const Scan = () => {
   const bottomSheetModalRef = useRef<BottomSheetModal>(null);
   const snapPoints = useMemo(() => ['30%'], []);
 
-  //async-storage (stockage des code barre sparer de ','. historique)
-  const { getItem, setItem } = useAsyncStorage('@storageHistory4');
+  //async-storage (stockage des code barre sparer de ' '. historique)
+  const { getItem, setItem } = useAsyncStorage('@storageHistory00');
   const setStorageHistory = async (data: any) => {
-    const item = await getItem();
-    if (item?.slice(item?.length - 13, item?.length) != data)
-      await setItem(item + ' ' + data);
+    const listCodeBarre = await getItem();
+    const itemParsed = listCodeBarre?.slice(listCodeBarre?.length - 13, listCodeBarre?.length);
+  
+    if (listCodeBarre == null)
+      await setItem(data);
+    else if (listCodeBarre?.indexOf(data) == -1 && itemParsed != data) {
+      
+      await setItem(listCodeBarre + ' ' + data);
+      console.log(getItem);
+    }
   };
   /////////////////////////////////////////////////////////////////////
 
@@ -80,6 +86,7 @@ export const Scan = () => {
   }, []);
   
   const getProductInfos = async (data: string) => {
+    var error = false;
     setScanned(true);
     await getProductCode(data)
       .then((response: AxiosResponse) => {
@@ -93,7 +100,7 @@ export const Scan = () => {
 
   const handleBarCodeScanned = async ({ type, data}: scannedProps) => {
     setScanned(true);
-    getProductInfos(data);
+    getProductInfos(data)
     setStorageHistory(data); //storage
   };
 

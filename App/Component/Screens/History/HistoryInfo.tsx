@@ -7,8 +7,8 @@ import styles from '../../../Style/History.style';
 export const HistoryInfo = () => {
 
 	return (
-	  <View style={styles.HistoryInfo}>
-		<Text>Historique</Text>
-	  </View>
+		<View style={styles.HistoryInfo}>
+			<Text>Historique</Text>
+		</View>
 	);
-  }
+}

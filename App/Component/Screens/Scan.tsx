@@ -55,7 +55,7 @@ export const Scan = () => {
   const bottomSheetModalRef = useRef<BottomSheetModal>(null);
   const snapPoints = useMemo(() => ['30%'], []);
 
-  //async-storage (stockage des code barre sparer de ' '. historique)
+  //async-storage (stockage des code barre sparer de ','. historique)
   const { getItem, setItem } = useAsyncStorage('@storageHistory00');
   const setStorageHistory = async (data: any) => {
     const listCodeBarre = await getItem();
@@ -64,7 +64,7 @@ export const Scan = () => {
     if (listCodeBarre == null)
       await setItem(data);
     else if (listCodeBarre?.indexOf(data) == -1 && itemParsed != data) {
-      
+
       await setItem(listCodeBarre + ' ' + data);
       console.log(getItem);
     }
@@ -94,7 +94,7 @@ export const Scan = () => {
         handlePresentModalPress();
       })
       .catch(error => {
-        console.log('error', error);
+        console.log('Erreur Scan', error.data);
       });
   };
 

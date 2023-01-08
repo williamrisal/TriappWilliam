@@ -25,17 +25,17 @@ const handleTabBarIcon = (route: string) => ({ focused, color, size }: iconProps
 
 export default function App() {
   const Tab = createBottomTabNavigator();
-  const [footerChose, setFooterChose] = useState(0);
+  const [footerChose, setFooterChose] = useState(1);
 
   const ChooseScreen = () => {
     switch (footerChose) {
       case 0:
-        return <Tab.Screen //autre affichage (l'historique ou autre)
+        return <Tab.Screen
                   name="History" component={History}
                   options={{ tabBarStyle: { display: 'none' }, headerShown: false }}
                 />
       case 1:
-        return <Tab.Screen // affichage scan
+        return <Tab.Screen
                   name="Scan" component={Scan}
                   options={{ tabBarStyle: { display: 'none' }, headerShown: false }}
                 />

@@ -12,9 +12,8 @@ const HistoryHeader = () => {
 
   return (
     <View style={styles.HistoryHeader}>
-      <Text>0</Text>
       <Text>Historique</Text>
-      <Text>0</Text>
+      <Text></Text>
     </View>
   );
 }

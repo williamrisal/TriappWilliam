@@ -11,7 +11,7 @@ export default StyleSheet.create({
 
 	//Component Header
 	HistoryHeader: {
-		backgroundColor: 'white',
+		backgroundColor: "white",
 		width: '100%',
 		height: 50,
 
@@ -19,10 +19,9 @@ export default StyleSheet.create({
 		marginTop: 35,
 		flexDirection: "row",
 		alignItems: "center",
-		justifyContent: "space-around",
 
 		borderBottomWidth: 0.3,
-		borderBottomColor: 'grey',
+		borderBottomColor: 'rgba(44, 140, 28, .7)',
 
 	},
 	//fin Compoent Header
@@ -35,6 +34,7 @@ export default StyleSheet.create({
 	HistoryInfo: {
 		backgroundColor: 'rgba(44, 140, 28, .7)',
 
+		top: 35,
 		width: '100%',
 		height: 300,
 	},
@@ -43,24 +43,29 @@ export default StyleSheet.create({
 	},
 	//View Item Lister
 	HistoryListItems: {
+		backgroundColor: 'white',
+
 		width: '100%',
 		height: 110,
-		borderBottomWidth: 0.25,
-		borderColor: 'grey',
-		marginTop: 5,
 		flexDirection: 'row',
+		
+		marginTop: 1,
+		borderBottomWidth: 0.25,
+		borderColor: 'rgba(44, 140, 28, .4)',
 	},
 	//ImageItemScanned
 	ImageItemScanned: {
 		width: 90,
-		height: 90,
+		height: 'auto',
+		maxHeight: 90,
+		resizeMode: 'contain',
 
-		borderRadius: 5,
-		marginTop: 5,
+		marginTop: 10,
 		left: 5,
-		padding: 10,
+		borderRadius: 5,
 	},
 	InfoItemScanned: {
+		left: 10,
 		position: 'relative',
 		margin: 10,
 	},

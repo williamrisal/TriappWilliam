@@ -7,6 +7,8 @@ import styles from '../../Style/Footer.style';
 //Fonction bas de page
 export const Footer = (props: any) => {
   
+
+
   //retourne le rendu
   return (
     <View style={styles.sheetContainer}>

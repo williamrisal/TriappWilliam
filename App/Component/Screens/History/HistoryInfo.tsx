@@ -14,7 +14,6 @@ const Smiley = (props: any) => {
 
 	const articleScan = props.articleScan;
 	const articleRecycled = props.articleRecycled;
-
 	const res = (articleRecycled/articleScan) * 100;
 
 	const smileyChoseLink = () => {
@@ -23,6 +22,7 @@ const Smiley = (props: any) => {
 		for (let i = 0, j = 0; i < 5; i++, j += 20)
 			if (res > j && res <= j + 20)
 				return(smileyLink[i]);
+		return (smileyLink[3]);
 	}
 
 	return (

@@ -7,6 +7,23 @@ import styles from '../../../Style/History.style';
 import { getProductCode } from '../../Services/getProductCode';
 import { Product } from '../../Models/ProductInfo';
 
+const HistoryListMore = (props: any) => {
+
+	return (
+		<>
+			<Modal
+				visible={props.visible}
+				onRequestClose={() => props.set(false)}
+				animationType="slide"
+    		 	presentationStyle="pageSheet"
+			>
+        		<View>
+        			<Button title="Fermer" onPress={() => props.set(false)} />
+    			</View>
+  			</Modal>
+		</>
+	);
+}
 
 const HistoryListItem = (props: any) => {
 	const [dataItem, setdata] = useState<Product>();
@@ -34,6 +51,7 @@ const HistoryListItem = (props: any) => {
 		getProductInfos(props.codeBarre);
 	}, []);
 
+
 	if (errorU)
 		return <View/>;
 	return (
@@ -50,7 +68,6 @@ const HistoryListItem = (props: any) => {
 					<Text style={{fontWeight: "300", left: 2,}}>
 						{getNameCompagny(dataItem?.product.brands)}
 					</Text>
-					
 				</View>
 				<View style={styles.submit}>
 					<Pressable
@@ -69,17 +86,7 @@ const HistoryListItem = (props: any) => {
 					</Pressable>
 				</View>
 			</View>
-			<Modal
-				visible={isModalVisible}
-				onRequestClose={() => setModalVisible(false)}
-
-				animationType="slide"
-       			 presentationStyle="pageSheet"
-			>
-        		<View>
-          			<Button title="Fermer" onPress={() => setModalVisible(false)} />
-        		</View>
-      		</Modal>
+			<HistoryListMore visible={isModalVisible} set={setModalVisible} />
 		</View>
 	);
 };
@@ -87,30 +94,9 @@ const HistoryListItem = (props: any) => {
 export const HistoryList = (props: any) => {
 
 	return (
-		//POUR TEST
-		/*
-		<>
-		<HistoryListItem codeBarre={"3268840001008"}/>
-		<HistoryListItem codeBarre={"3268840001008"}/>
-		<HistoryListItem codeBarre={"3268840001008"}/>
-		<HistoryListItem codeBarre={"3268840001008"}/>
-		<HistoryListItem codeBarre={"3268840001008"}/>
-		<HistoryListItem codeBarre={"3268840001008"}/>
-		<HistoryListItem codeBarre={"3268840001008"}/>
-		<HistoryListItem codeBarre={"3268840001008"}/>
-		<HistoryListItem codeBarre={"3268840001008"}/>
-		<HistoryListItem codeBarre={"3268840001008"}/>
-		<HistoryListItem codeBarre={"3268840001008"}/>
-		<HistoryListItem codeBarre={"3268840001008"}/>
-		<HistoryListItem codeBarre={"3268840001008"}/>
-		<HistoryListItem codeBarre={"3268840001008"}/>
-		</>
-		*/
-		//*
 		<View style={styles.HistoryList}>
 			{props.value != null && String(props.value).split(" ").reverse().map(
 				(x, i) => <HistoryListItem codeBarre={x} key={i} />)}
 		</View>
-		// */
 	);
 }

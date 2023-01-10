@@ -11,7 +11,7 @@ import { HistoryList } from './HistoryList';
 const HistoryHeader = () => {
   return (
     <View style={styles.HistoryHeader}>
-      <Text style={{ fontWeight: "100", fontSize: 30, left: 30,}}>Historique</Text>
+      <Text style={{ fontWeight: "100", fontSize: 30, left: 30, top: 15,}}>Historique</Text>
     </View>
   );
 }
@@ -26,7 +26,7 @@ export const History = () => {
   const handleScroll = (event: any) => {
     if (event.nativeEvent.contentOffset.y < 335)
       setShowComponentHeader(false);
-    if (event.nativeEvent.contentOffset.y > 335)
+    if (event.nativeEvent.contentOffset.y > 400)
       setShowComponentHeader(true);
   }
 

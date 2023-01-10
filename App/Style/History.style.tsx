@@ -13,10 +13,9 @@ export default StyleSheet.create({
 	HistoryHeader: {
 		backgroundColor: "white",
 		width: '100%',
-		height: 50,
+		height: 85,
 
 		// centrer le header
-		marginTop: 35,
 		flexDirection: "row",
 		alignItems: "center",
 

@@ -19,14 +19,20 @@ const HistoryHeader = () => {
 export const History = () => {
   const [showComponentHeader, setShowComponentHeader] = useState(false);
 
-  const handleScroll = (event: any) => {
-    if (event.nativeEvent.contentOffset.y < 300)
-      setShowComponentHeader(false);
-    if (event.nativeEvent.contentOffset.y > 300)
-      setShowComponentHeader(true);
+  const { getItem } = useAsyncStorage('@storageHistory00');
+	const [value, setValue] = useState(null);
+	const takeItemFromStorage = async () => setValue(await getItem());
 
-    console.log(event.nativeEvent.contentOffset.y);
+  const handleScroll = (event: any) => {
+    if (event.nativeEvent.contentOffset.y < 335)
+      setShowComponentHeader(false);
+    if (event.nativeEvent.contentOffset.y > 335)
+      setShowComponentHeader(true);
   }
+
+  useEffect(() => {
+		takeItemFromStorage();
+	}, []);
 
   return (
     <View style={styles.HistoryPage}>
@@ -36,8 +42,8 @@ export const History = () => {
           onScroll={handleScroll}
           scrollEventThrottle={20}
       >
-        <HistoryInfo />
-        <HistoryList />
+        <HistoryInfo value={value}/>
+        <HistoryList value={value}/>
       </ScrollView>
     </View>
   );

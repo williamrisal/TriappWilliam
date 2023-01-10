@@ -34,9 +34,25 @@ export default StyleSheet.create({
 	HistoryInfo: {
 		backgroundColor: 'rgba(44, 140, 28, .7)',
 
-		top: 35,
 		width: '100%',
-		height: 300,
+		height: 335,
+
+		flexDirection: 'column',
+	},
+	HistoryInfoCase: {
+		flexDirection: 'row',
+
+		height: 140,
+		width: "100%",
+	},
+	HistoryInfoCase1: {
+		top: 100,
+		height: 160,
+		width: "100%",
+	},
+	Smiley: {
+		height: 150,
+		width: 150,
 	},
 	HistoryList: {
 		backgroundColor: 'white',

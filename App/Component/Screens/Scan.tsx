@@ -63,11 +63,8 @@ export const Scan = () => {
   
     if (listCodeBarre == null)
       await setItem(data);
-    else if (listCodeBarre?.indexOf(data) == -1 && itemParsed != data) {
-
+    else if (listCodeBarre?.indexOf(data) == -1 && itemParsed != data)
       await setItem(listCodeBarre + ' ' + data);
-      console.log(getItem);
-    }
   };
   /////////////////////////////////////////////////////////////////////
 

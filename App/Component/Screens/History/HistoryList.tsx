@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { View, Text, Image, Pressable } from 'react-native';
+import { View, Text, Image, Pressable, Modal, Button } from 'react-native';
 import { useAsyncStorage } from '@react-native-async-storage/async-storage';
 import { AxiosResponse } from 'axios';
 
@@ -28,6 +28,8 @@ const HistoryListItem = (props: any) => {
 		return (arrayCompagny[0] == "null" ? "" : arrayCompagny[0]);
 	}
 
+	const [isModalVisible, setModalVisible] = useState(false);
+
 	useEffect(() => {
 		getProductInfos(props.codeBarre);
 	}, []);
@@ -52,13 +54,13 @@ const HistoryListItem = (props: any) => {
 				</View>
 				<View style={styles.submit}>
 					<Pressable
+						onPress={() => setModalVisible(true)}
 						style={({ pressed }) => [{
 							opacity: pressed ? 0.5 : 1,
 						},]}
 						>
 						{({ pressed }) => (
 							<Image
-							//logo a remplacer par le notre
 							defaultSource={{}}
 							source={{ uri: 'https://cdn-icons-png.flaticon.com/512/4066/4066676.png' }}
 							style={styles.iconSubmit}
@@ -67,21 +69,26 @@ const HistoryListItem = (props: any) => {
 					</Pressable>
 				</View>
 			</View>
+			<Modal
+				visible={isModalVisible}
+				onRequestClose={() => setModalVisible(false)}
+
+				animationType="slide"
+       			 presentationStyle="pageSheet"
+			>
+        		<View>
+          			<Button title="Fermer" onPress={() => setModalVisible(false)} />
+        		</View>
+      		</Modal>
 		</View>
 	);
 };
 
-export const HistoryList = () => {
-	const { getItem } = useAsyncStorage('@storageHistory00');
-	const [value, setValue] = useState(null);
-	const takeItemFromStorage = async () => setValue(await getItem());
-
-	useEffect(() => {
-		takeItemFromStorage();
-	}, []);
+export const HistoryList = (props: any) => {
 
 	return (
 		//POUR TEST
+		/*
 		<>
 		<HistoryListItem codeBarre={"3268840001008"}/>
 		<HistoryListItem codeBarre={"3268840001008"}/>
@@ -98,11 +105,12 @@ export const HistoryList = () => {
 		<HistoryListItem codeBarre={"3268840001008"}/>
 		<HistoryListItem codeBarre={"3268840001008"}/>
 		</>
-		/*
+		*/
+		//*
 		<View style={styles.HistoryList}>
-			{value != null && String(value).split(" ").reverse().map(
+			{props.value != null && String(props.value).split(" ").reverse().map(
 				(x, i) => <HistoryListItem codeBarre={x} key={i} />)}
 		</View>
-		*/
+		// */
 	);
 }

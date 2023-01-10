@@ -5,6 +5,7 @@ export default StyleSheet.create({
 
 	sheetContainer: {
 	  padding: 5,
+	  paddingBottom: 20,
 	  height: 70,
 	  zIndex: 1,
 
@@ -14,5 +15,8 @@ export default StyleSheet.create({
 
 	  backgroundColor: "white",
 	},
-
+	img: {
+		width: 30,
+		height: 30
+	}
   });

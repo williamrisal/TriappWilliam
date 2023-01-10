@@ -8,6 +8,8 @@ import { Scan } from './App/Component/Screens/Scan';
 import { History } from './App/Component/Screens/History/History';
 import { Footer } from './App/Component/Screens/Footer';
 import { useState } from 'react';
+import Setting from './App/Component/Screens/setting';
+import { Settings } from 'react-native';
 
 interface iconProps {
   focused: boolean;
@@ -37,6 +39,11 @@ export default function App() {
       case 1:
         return <Tab.Screen // affichage scan
                   name="Scan" component={Scan}
+                  options={{ tabBarStyle: { display: 'none' }, headerShown: false }}
+                />
+      case 2:
+        return <Tab.Screen // affichage Settings
+                  name="Settings" component={Setting}
                   options={{ tabBarStyle: { display: 'none' }, headerShown: false }}
                 />
     }

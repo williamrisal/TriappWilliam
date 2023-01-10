@@ -2,6 +2,7 @@ import React, { useState, useEffect, useRef, useMemo, useCallback } from 'react'
 import { Text, View, StyleSheet, Image, Button } from 'react-native';
 import { useAsyncStorage } from '@react-native-async-storage/async-storage';
 
+
 import { AxiosResponse } from 'axios';
 import { BarCodeScanner } from 'expo-barcode-scanner';
 import { BottomSheetModalProvider, BottomSheetModal } from '@gorhom/bottom-sheet';
@@ -11,6 +12,7 @@ import { Product } from '../Models/ProductInfo';
 import { getProductCode } from '../Services/getProductCode';
 
 import styles from '../../Style/Scan.style';
+
 
 interface scannedProps {
   type: string;
@@ -99,13 +101,21 @@ export const Scan = () => {
   };
 
   const handleBarCodeScanned = async ({ type, data}: scannedProps) => {
-    setScanned(true);
-    getProductInfos(data)
-    setStorageHistory(data); //storage
+    if(!data.match(/[a-z]/i))
+    {
+      setScanned(true);
+      getProductInfos(data)
+      setStorageHistory(data); //storage
+    }
+    else
+    {
+      return(undefined)
+    }
   };
 
   const handleSheetChange = useCallback((index: number) => {
     setScanned(false);
+
   }, []);
 
   if (hasPermission === null)

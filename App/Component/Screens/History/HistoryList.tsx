@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import { View, Text, Image, Pressable, Modal, Button } from 'react-native';
-import { useAsyncStorage } from '@react-native-async-storage/async-storage';
 import { AxiosResponse } from 'axios';
 
 import styles from '../../../Style/History.style';

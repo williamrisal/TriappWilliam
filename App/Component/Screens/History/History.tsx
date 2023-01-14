@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { View, Text, Button, SafeAreaView, ScrollView } from 'react-native';
+import { View, Text, ScrollView } from 'react-native';
 import { useAsyncStorage } from '@react-native-async-storage/async-storage';
 
 import styles from '../../../Style/History.style';

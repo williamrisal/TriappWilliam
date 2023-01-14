@@ -1,5 +1,4 @@
-import { StyleSheet, useColorScheme } from 'react-native';
-import { color } from 'react-native-reanimated';
+import { StyleSheet } from 'react-native';
 
 export default StyleSheet.create({
 

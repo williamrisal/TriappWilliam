@@ -1,5 +1,5 @@
-import React, { useState, useEffect, useRef, useMemo, useCallback } from 'react';
-import { Text, View, StyleSheet, Image, Button, Pressable } from 'react-native';
+import React from 'react';
+import {View, Image, Pressable } from 'react-native';
 
 import styles from '../../Style/Footer.style';
 

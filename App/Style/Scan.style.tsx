@@ -41,14 +41,15 @@ export default StyleSheet.create({
 		fontWeight: '400',
 		color: '#A9A9A9',
 	},
-
-	recScan: {
-		borderWidth: 2,
-		borderColor: "white",
-
+	image_scan: {
+		width: '30%',
+		height: '30%',
+		marginLeft: "10%",
+		marginTop: "55%",
+		padding: '40%',
 		justifyContent: 'center',
 		alignItems: 'center',
-		height: 150,
-		margin: 30,
+		opacity: 0.3,
+		// mettre au centre l'image
 	},
 });

@@ -126,6 +126,7 @@ export const Scan = () => {
           onBarCodeScanned={scanned ? undefined : handleBarCodeScanned}
           style={StyleSheet.absoluteFillObject}
         />
+          {/* {  ? <Image style={styles.image_scan} source={require('../../Assets/scan.png')} /> : null} */}
         {productData && (
           <View style={styles.sheetContainer}>
             <BottomSheetModalProvider>
@@ -136,7 +137,7 @@ export const Scan = () => {
                   productData={productData}
                 />
             </BottomSheetModalProvider>
-            <View style={styles.recScan} />
+            <View />
           </View>
         )}
     </View>

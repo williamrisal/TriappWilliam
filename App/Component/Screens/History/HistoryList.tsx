@@ -56,16 +56,16 @@ const HistoryListItem = (props: any) => {
 	return (
 		<View style={styles.HistoryListItems}>
 		<Image
-		source={{ uri: dataItem?.product.image_url }}
+		source={{ uri: dataItem?.product?.image_url == null ? 'https://cdn-icons-png.flaticon.com/512/4066/4066676.png' : dataItem?.product.image_url }}
 		style={styles.ImageItemScanned}
 		/>
 		<View style={styles.InfoItemScanned}>
 				<View style={styles.textItem}>
 					<Text style={{fontWeight: "600",}}>
-						{dataItem?.product.product_name}
+						{dataItem?.product?.product_name == null ? "Nom du produit" : dataItem?.product.product_name}
 					</Text>
 					<Text style={{fontWeight: "300", left: 2,}}>
-						{getNameCompagny(dataItem?.product.brands)}
+						{getNameCompagny(dataItem?.product?.brands? dataItem?.product.brands : "null")}
 					</Text>
 				</View>
 				<View style={styles.submit}>

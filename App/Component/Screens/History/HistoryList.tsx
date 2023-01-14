@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { View, Text, Pressable } from 'react-native';
+import { View, Text, Image, Pressable, Modal, Button } from 'react-native';
 import { useAsyncStorage } from '@react-native-async-storage/async-storage';
 import { AxiosResponse } from 'axios';
 
@@ -7,47 +7,96 @@ import styles from '../../../Style/History.style';
 import { getProductCode } from '../../Services/getProductCode';
 import { Product } from '../../Models/ProductInfo';
 
+const HistoryListMore = (props: any) => {
 
-const HistoryListItem = (props) => {
-	const [data, setdata] = useState(undefined);
+	return (
+		<>
+			<Modal
+				visible={props.visible}
+				onRequestClose={() => props.set(false)}
+				animationType="slide"
+    		 	presentationStyle="pageSheet"
+			>
+        		<View>
+        			<Button title="Fermer" onPress={() => props.set(false)} />
+    			</View>
+  			</Modal>
+		</>
+	);
+}
+
+const HistoryListItem = (props: any) => {
+	const [dataItem, setdata] = useState<Product>();
+	const [errorU, setErrorU] = useState(false);
+
 	const getProductInfos = async (data: string) => {
 		await getProductCode(data)
-		  .then((response: AxiosResponse) => {
-			setdata(response.data);
-		  })
-		  .catch(error => {
-			console.log("erreur", error);
-		});
-	  };
-	  
+			.then((response: AxiosResponse) => {
+				setdata(response.data);
+			})
+			.catch(error => {
+				console.log("error => ", error);
+				setErrorU(true);
+			});
+	};
+
+	const getNameCompagny = (data: any) => {
+		const arrayCompagny = data != undefined ? data.split(',') : "null,".split(',');
+		return (arrayCompagny[0] == "null" ? "" : arrayCompagny[0]);
+	}
+
+	const [isModalVisible, setModalVisible] = useState(false);
+
 	useEffect(() => {
 		getProductInfos(props.codeBarre);
 	}, []);
 
-	// les info sont recupere dans data il faut juste parse et afficher se que tu veut dans la view 
 
+	if (errorU)
+		return <View/>;
 	return (
-		<Pressable>
-			<View style={styles.HistoryListItems}>
-				<Text>{props.codeBarre}</Text>
+		<View style={styles.HistoryListItems}>
+		<Image
+		source={{ uri: dataItem?.product.image_url }}
+		style={styles.ImageItemScanned}
+		/>
+		<View style={styles.InfoItemScanned}>
+				<View style={styles.textItem}>
+					<Text style={{fontWeight: "600",}}>
+						{dataItem?.product.product_name}
+					</Text>
+					<Text style={{fontWeight: "300", left: 2,}}>
+						{getNameCompagny(dataItem?.product.brands)}
+					</Text>
+				</View>
+				<View style={styles.submit}>
+					<Pressable
+						onPress={() => setModalVisible(true)}
+						style={({ pressed }) => [{
+							opacity: pressed ? 0.5 : 1,
+						},]}
+						>
+						{({ pressed }) => (
+							<Image
+							defaultSource={{}}
+							source={{ uri: 'https://cdn-icons-png.flaticon.com/512/4066/4066676.png' }}
+							style={styles.iconSubmit}
+							/>
+							)}
+					</Pressable>
+				</View>
 			</View>
-		</Pressable>
+			<HistoryListMore visible={isModalVisible} set={setModalVisible} />
+		</View>
 	);
 };
 
-export const HistoryList = () => {
-	const { getItem } = useAsyncStorage('@storageHistory00');
-	const [value, setValue] = useState(null);
-	const takeItemFromStorage = async () => setValue(await getItem());
-
-	useEffect(() => {
-		takeItemFromStorage();
-	  }, []);
+export const HistoryList = (props: any) => {
 
 	return (
 		<View style={styles.HistoryList}>
-			{String(value).split(" ").reverse().map(
-          	(x, i) => <HistoryListItem codeBarre={x} key={i} />)}
+			{props.value != null && String(props.value).split(" ").reverse().map(
+				(x, i) => <HistoryListItem codeBarre={x} key={i} />)}
 		</View>
 	);
 }

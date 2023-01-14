@@ -29,10 +29,10 @@ const HistoryListItem = (props: any) => {
 	const [loading, setLoading] = useState(false);
 
 	const getProductInfos = async (data: string) => {
+		setLoading(true);
 		await getProductCode(data)
 			.then((response: AxiosResponse) => {
 				setdata(response.data);
-				setLoading(true);
 			})
 			.catch(error => {
 				console.log("error => ", error);
@@ -49,14 +49,14 @@ const HistoryListItem = (props: any) => {
 		getProductInfos(props.codeBarre);
 	}, []);
 
-	if (errorU)
+	if ((props.x == 0 && props.codeBarre == ""))
 		return <View/>;
 
 	return (
 		<View style={styles.HistoryListItems}>
 			{loading ? (
 				<Image
-					source={{ uri: dataItem?.product?.image_url}}
+					source={{ uri: dataItem?.product?.image_url ? dataItem?.product?.image_url : 'https://cdn-icons-png.flaticon.com/512/3445/3445741.png'}}
 					style={styles.ImageItemScanned}
 				/>
 			) : ( <Image style={[styles.ImageItemScanned, styles.skeletonScreen]} /> )}
@@ -64,10 +64,10 @@ const HistoryListItem = (props: any) => {
 				{loading ? (
 					<View style={styles.textItem}>
 						<Text style={{fontWeight: "600",}}>
-							{dataItem?.product?.product_name == null ? "Inconnue" : dataItem?.product.product_name}
+							{dataItem?.product?.product_name ? dataItem?.product.product_name : dataItem?.product?.brands ? dataItem?.product.brands : "Bientot"}
 						</Text>
 						<Text style={{fontWeight: "300", left: 2,}}>
-							{getNameCompagny(dataItem?.product?.brands? dataItem?.product.brands : "Inconnue")}
+							{getNameCompagny(dataItem?.product?.brands ? dataItem?.product.brands : 'A venir..')}
 						</Text>
 					</View>
 				) : (
@@ -77,20 +77,26 @@ const HistoryListItem = (props: any) => {
 					</View>
 				)}
 				<View style={styles.submit}>
-					<Pressable
-						onPress={() => setModalVisible(true)}
-						style={({ pressed }) => [{
-							opacity: pressed ? 0.5 : 1,
-						},]}
-					>
-						{({ pressed }) => (
-							<Image
-								defaultSource={{}}
-								source={{ uri: 'https://cdn-icons-png.flaticon.com/512/4066/4066676.png' }}
-								style={styles.iconSubmit}
-							/>
-						)}
-					</Pressable>
+					{loading && (dataItem?.product?.image_url || dataItem?.product?.brands ? (
+						<Pressable
+							onPress={() => setModalVisible(true)}
+							style={({ pressed }) => [{
+								opacity: pressed ? 0.5 : 1,
+							},]}
+						>
+							{({ pressed }) => (
+								<Image
+									source={{ uri: 'https://cdn-icons-png.flaticon.com/512/4066/4066676.png' }}
+									style={styles.iconSubmit}
+								/>
+							)}
+						</Pressable> 
+					) : (
+						<Image
+							source={{ uri: 'https://cdn-icons-png.flaticon.com/512/738/738884.png' }}
+							style={styles.iconSubmit}
+						/>
+					))}
 				</View>
 			</View>
 			<HistoryListMore visible={isModalVisible} set={setModalVisible} />
@@ -99,11 +105,10 @@ const HistoryListItem = (props: any) => {
 };
 
 export const HistoryList = (props: any) => {
-
 	return (
 		<View style={styles.HistoryList}>
 			{props.value != null && String(props.value).split(" ").reverse().map(
-				(x, i) => <HistoryListItem codeBarre={x} key={i} />
+				(x, i) => <HistoryListItem codeBarre={x} x={i} key={i} />
 			)}
 		</View>
 	);

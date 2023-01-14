@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { View, Text, Image } from 'react-native';
+import { View, Text, Image, Pressable } from 'react-native';
 
 import styles from '../../../Style/History.style';
 
@@ -35,13 +35,21 @@ const Smiley = (props: any) => {
 export const HistoryInfo = (props: any) => {
 	const [article, setArticle] = useState(0);
 	const [articleRecyclable, setArticleRecyclable] = useState(6);
+
+	const updateItem = () => {
+		let value = 0;
+
+		if (props.value == null)
+			return;
+		String(props.value)?.split(" ").reverse().map(
+			(x, i) => value += 1 );
+		String(props.value)?.length == 14 && (value--);
+		setArticle(value);
+		setArticleRecyclable(value); // a Faire
+	}
 	
 	useEffect(() => {
-		const interval = setInterval(() => {
- 			(String(props.value)?.split(" ").reverse().map(
-				(x, i) => {setArticle(i)}));
-		  }, 1000);
-		  return () => clearInterval(interval);
+		updateItem();
 	}, [props.value]);
 
 	return (

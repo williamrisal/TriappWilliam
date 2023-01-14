@@ -11,6 +11,7 @@ import { Product } from '../Models/ProductInfo';
 import { getProductCode } from '../Services/getProductCode';
 
 import styles from '../../Style/Scan.style';
+import { Link } from '@react-navigation/native';
 
 
 interface scannedProps {
@@ -54,15 +55,17 @@ export const Scan = () => {
   const bottomSheetModalRef = useRef<BottomSheetModal>(null);
   const snapPoints = useMemo(() => ['30%'], []);
 
-  const { getItem, setItem } = useAsyncStorage('@storageHistory00');
-  const setStorageHistory = async (data: any) => {
+  const { getItem, setItem } = useAsyncStorage('@storageHistory03');
+    const setStorageHistory = async (data: any) => {
     const listCodeBarre = await getItem();
     const itemParsed = listCodeBarre?.slice(listCodeBarre?.length - 13, listCodeBarre?.length);
-  
+
+    if (data.length != 13)
+      return;
     if (listCodeBarre == null)
-      await setItem(data);
-    else if (listCodeBarre?.indexOf(data) == -1 && itemParsed != data)
-      await setItem(listCodeBarre + ' ' + data);
+      await setItem(data + ' ');
+    else if (listCodeBarre.indexOf(data) == -1 && itemParsed != data)
+      await setItem(listCodeBarre.length == 14 ? listCodeBarre + data : listCodeBarre + ' ' + data);
   };
 
   useEffect(() => {
@@ -92,16 +95,12 @@ export const Scan = () => {
   };
 
   const handleBarCodeScanned = async ({ type, data}: scannedProps) => {
-    if(!data.match(/[a-z]/i))
-    {
+    if(!data.match(/[a-z]/i)) {
       setScanned(true);
       getProductInfos(data)
       setStorageHistory(data); //storage
-    }
-    else
-    {
+    } else
       return(undefined)
-    }
   };
 
   const handleSheetChange = useCallback((index: number) => {

@@ -19,7 +19,7 @@ const HistoryHeader = () => {
 export const History = () => {
     const [showComponentHeader, setShowComponentHeader] = useState(false);
 
-    const { getItem } = useAsyncStorage('@storageHistory00');
+    const { getItem } = useAsyncStorage('@storageHistory03');
 	  const [value, setValue] = useState(null);
 	  const takeItemFromStorage = async () => setValue(await getItem());
 

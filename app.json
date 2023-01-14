@@ -1,40 +1,48 @@
 {
-	"expo": {
-	  "name": "app",
-	  "slug": "app",
-	  "assets": [
-		"./App/Assets/eco.ttf"
-	  ],
-	  "version": "1.0.0",
-	  "orientation": "portrait",
-	  "icon": "./App/Assets/icon.png",
-	  "userInterfaceStyle": "light",
-	  "splash": {
-		"image": "./App/Assets/splash.png",
-		"resizeMode": "contain",
-		"backgroundColor": "#ffffff"
-	  },
-	  "updates": {
-		"fallbackToCacheTimeout": 0
-	  },
-	  "assetBundlePatterns": [
-		"**/*"
-	  ],
-	  "ios": {
-		"supportsTablet": true,
-		"infoPlist": {
-		  "NSCameraUsageDescription": "This app uses the camera to scan barcodes on product."
-		}
-	  },
-	  "android": {
-		"adaptiveIcon": {
-		  "foregroundImage": "./App/Assets/adaptive-icon.png",
-		  "backgroundColor": "#FFFFFF"
-		},
-		"blockedPermissions": ["android.permission.CAMERA"]
-	  },
-	  "web": {
-		"favicon": "./App/Assets/favicon.png"
-	  }
-	}
+  "expo": {
+    "name": "app",
+    "slug": "app",
+    "assets": [
+      "./App/Assets/eco.ttf"
+    ],
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "icon": "./App/Assets/icon.png",
+    "userInterfaceStyle": "light",
+    "splash": {
+      "image": "./App/Assets/splash.png",
+      "resizeMode": "contain",
+      "backgroundColor": "#ffffff"
+    },
+    "updates": {
+      "fallbackToCacheTimeout": 0
+    },
+    "assetBundlePatterns": [
+      "**/*"
+    ],
+    "ios": {
+      "supportsTablet": true,
+      "infoPlist": {
+        "NSCameraUsageDescription": "This app uses the camera to scan barcodes on product."
+      },
+      "bundleIdentifier": "com.jordan.s.app"
+    },
+    "android": {
+      "adaptiveIcon": {
+        "foregroundImage": "./App/Assets/adaptive-icon.png",
+        "backgroundColor": "#FFFFFF"
+      },
+      "blockedPermissions": [
+        "android.permission.CAMERA"
+      ]
+    },
+    "web": {
+      "favicon": "./App/Assets/favicon.png"
+    },
+    "extra": {
+      "eas": {
+        "projectId": "380bb39f-23c0-4a54-99f4-37f384499aef"
+      }
+    }
   }
+}

@@ -1,19 +1,17 @@
-import { StyleSheet, useColorScheme } from 'react-native';
-import { color } from 'react-native-reanimated';
+import { StyleSheet } from 'react-native';
 
 export default StyleSheet.create({
 
 	sheetContainer: {
-	  padding: 5,
-	  paddingBottom: 20,
-	  height: 70,
-	  zIndex: 1,
+		width: '100%',
+		height: 70,
+	  	zIndex: 1,
 
-	  flexDirection: "row",
-	  alignItems: "center",
-	  justifyContent: "space-around",
+	  	flexDirection: "row",
+	  	alignItems: "center",
+	  	justifyContent: "space-around",
 
-	  backgroundColor: "white",
+	  	backgroundColor: "whitesmoke",
 	},
 	img: {
 		width: 30,

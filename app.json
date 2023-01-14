@@ -2,6 +2,9 @@
 	"expo": {
 	  "name": "app",
 	  "slug": "app",
+	  "assets": [
+		"./App/Assets/eco.ttf"
+	  ],
 	  "version": "1.0.0",
 	  "orientation": "portrait",
 	  "icon": "./App/Assets/icon.png",

@@ -78,7 +78,7 @@ export const HistoryInfo = (props: any) => {
 						bottom: 0,
 					}}> Sur un Total de {articleRecyclable} Recycable </Text>
 				</View>
-			) : <View />}
+			) : <View /> }
 		</View>
 	);
 }

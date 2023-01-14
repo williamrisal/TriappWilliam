@@ -9,42 +9,42 @@ import { HistoryList } from './HistoryList';
 
 
 const HistoryHeader = () => {
-  return (
-    <View style={styles.HistoryHeader}>
-      <Text style={{ fontWeight: "100", fontSize: 30, left: 30, top: 15,}}>Historique</Text>
-    </View>
+    return (
+        <View style={styles.HistoryHeader}>
+            <Text style={{ fontWeight: "100", fontSize: 30, left: 30, top: 15,}}>Historique</Text>
+        </View>
   );
 }
 
 export const History = () => {
-  const [showComponentHeader, setShowComponentHeader] = useState(false);
+    const [showComponentHeader, setShowComponentHeader] = useState(false);
 
-  const { getItem } = useAsyncStorage('@storageHistory00');
-	const [value, setValue] = useState(null);
-	const takeItemFromStorage = async () => setValue(await getItem());
+    const { getItem } = useAsyncStorage('@storageHistory00');
+	  const [value, setValue] = useState(null);
+	  const takeItemFromStorage = async () => setValue(await getItem());
 
-  const handleScroll = (event: any) => {
-    if (event.nativeEvent.contentOffset.y < 335)
-      setShowComponentHeader(false);
-    if (event.nativeEvent.contentOffset.y > 400)
-      setShowComponentHeader(true);
-  }
+    const handleScroll = (event: any) => {
+        if (event.nativeEvent.contentOffset.y < 335)
+            setShowComponentHeader(false);
+        if (event.nativeEvent.contentOffset.y > 400)
+            setShowComponentHeader(true);
+    }
 
-  useEffect(() => {
-		takeItemFromStorage();
-	}, []);
+    useEffect(() => {
+		    takeItemFromStorage();
+	  }, []);
 
-  return (
-    <View style={styles.HistoryPage}>
-      {showComponentHeader && <HistoryHeader /> }
-      <ScrollView
-          style={styles.History}
-          onScroll={handleScroll}
-          scrollEventThrottle={20}
-      >
-        <HistoryInfo value={value}/>
-        <HistoryList value={value}/>
-      </ScrollView>
-    </View>
-  );
+    return (
+        <View style={styles.HistoryPage}>
+            {showComponentHeader && <HistoryHeader /> }
+            <ScrollView
+            style={styles.History}
+            onScroll={handleScroll}
+            scrollEventThrottle={20}
+            >
+                <HistoryInfo value={value}/>
+                <HistoryList value={value}/>
+            </ScrollView>
+        </View>
+    );
 }

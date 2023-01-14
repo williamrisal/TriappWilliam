@@ -101,4 +101,7 @@ export default StyleSheet.create({
 		width: 40,
 		height: 40,
 	},
+	skeletonScreen: {
+		backgroundColor: 'rgba(216, 216, 216, .7)',
+	},
 });

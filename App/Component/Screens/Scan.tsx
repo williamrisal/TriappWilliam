@@ -2,7 +2,6 @@ import React, { useState, useEffect, useRef, useMemo, useCallback } from 'react'
 import { Text, View, StyleSheet, Image, Button } from 'react-native';
 import { useAsyncStorage } from '@react-native-async-storage/async-storage';
 
-
 import { AxiosResponse } from 'axios';
 import { BarCodeScanner } from 'expo-barcode-scanner';
 import { BottomSheetModalProvider, BottomSheetModal } from '@gorhom/bottom-sheet';
@@ -19,7 +18,6 @@ interface scannedProps {
   data: string;
 }
 
-//Fonction Component menu deroulant avec les info
 const DropDown = (props: any) => {
   let errorImg = 'https://www.batirama.com/scaled/983/755/1/2017/08/31/125459/images/article/15082-_00erreur.jpg';
 
@@ -48,7 +46,6 @@ const DropDown = (props: any) => {
   );
 }
 
-//Fonction Principal Scan
 export const Scan = () => {
   const [hasPermission, setHasPermission] = useState(null);
   const [scanned, setScanned] = useState(false);
@@ -57,7 +54,6 @@ export const Scan = () => {
   const bottomSheetModalRef = useRef<BottomSheetModal>(null);
   const snapPoints = useMemo(() => ['30%'], []);
 
-  //async-storage (stockage des code barre sparer de ','. historique)
   const { getItem, setItem } = useAsyncStorage('@storageHistory00');
   const setStorageHistory = async (data: any) => {
     const listCodeBarre = await getItem();
@@ -68,12 +64,10 @@ export const Scan = () => {
     else if (listCodeBarre?.indexOf(data) == -1 && itemParsed != data)
       await setItem(listCodeBarre + ' ' + data);
   };
-  /////////////////////////////////////////////////////////////////////
 
   useEffect(() => {
     getBarCodeScannerPermissions();
   }, []);
-
 
   const getBarCodeScannerPermissions = async () => {
     const { status } = await BarCodeScanner.requestPermissionsAsync();

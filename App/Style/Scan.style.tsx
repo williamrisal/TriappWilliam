@@ -52,4 +52,9 @@ export default StyleSheet.create({
 		opacity: 0.3,
 		// mettre au centre l'image
 	},
+	image_ecoscore: {
+		width: "50%",
+		marginTop: "-31%",
+		resizeMode: 'contain',
+	}
 });

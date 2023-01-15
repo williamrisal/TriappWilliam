@@ -1,6 +1,9 @@
 import React, { useState, useEffect, useRef, useMemo, useCallback } from 'react';
 import { Text, View, StyleSheet, Image, Button } from 'react-native';
 import { useAsyncStorage } from '@react-native-async-storage/async-storage';
+import { SvgUri } from 'react-native-svg';
+import gradea from '../../Assets/EcoScore/ecoscore-a.png';
+
 
 import { AxiosResponse } from 'axios';
 import { BarCodeScanner } from 'expo-barcode-scanner';
@@ -20,7 +23,28 @@ interface scannedProps {
 
 const DropDown = (props: any) => {
   let errorImg = 'https://www.batirama.com/scaled/983/755/1/2017/08/31/125459/images/article/15082-_00erreur.jpg';
-
+  // if (props.productData && props.productData.product && props.productData.product.ecoscore_data) {
+  //   grade = props.productData.product.ecoscore_data.grade;
+  // }
+  const grade = props.productData?.product?.ecoscore_data.grade;
+  let imageEcoScore = require('../../Assets/EcoScore/ecoscore-unknown.png');
+  
+  switch (grade) {
+    case 'a':
+      imageEcoScore = require('../../Assets/EcoScore/ecoscore-a.png');
+      break;
+    case 'b':
+      imageEcoScore = require('../../Assets/EcoScore/ecoscore-b.png');
+      break;
+    case 'c':
+      imageEcoScore = require('../../Assets/EcoScore/ecoscore-c.png');
+      break;
+    case 'd':
+      imageEcoScore = require('../../Assets/EcoScore/ecoscore-d.png');
+      break;
+    default:
+      break;
+  }
   return (
     <BottomSheetModal
       ref={props.bottomSheetModalRef}
@@ -40,6 +64,15 @@ const DropDown = (props: any) => {
           <Text style={styles.productName}>
             {props.productData?.product?.product_name_fr ? uppercaseFirstLetter(props.productData?.product?.product_name_fr) : "Nom inconnu"}
           </Text>
+          {/* <View style={{ width: "10%", flex: 1 }}>
+            <SvgUri
+              uri= {"https://static.openfoodfacts.org/images/attributes/ecoscore-" + props.productData?.product?.ecoscore_data.grade + ".svg"}
+            />
+          </View> */}
+        <Image
+          style={styles.image_ecoscore}
+          source={imageEcoScore}
+        />
         </View>
       </View>
     </BottomSheetModal>
@@ -131,6 +164,7 @@ export const Scan = () => {
                   productData={productData}
                 />
             </BottomSheetModalProvider>
+            
             <View />
           </View>
         )}

@@ -13,24 +13,33 @@ export default StyleSheet.create({
 		zIndex: 1,
 	},
 
-	image: {
-		width: 120,
-		height: 120,
-		resizeMode: 'contain',
-		borderRadius: 10,
-	},
-
 	sheetHeader: {
+		height: 180,
+		width: '100%',
 		flexDirection: 'row',
 		padding: 16,
 	},
 
+	image: {
+		maxWidth: 120,
+		maxHeight: 120,
+		width: 120,
+		height: 120,
+		resizeMode: 'contain',
+		borderRadius: 5,
+	},
+
 	productInfosContainer: {
+		height: 70,
+		width: '100%',
+	},
+	productContainer: {
+		height: 130,
+		width: 200,
 		flexDirection: 'column',
 		marginTop: 10,
 		marginLeft: 20,
 	},
-
 	productName: {
 		fontSize: 20,
 		fontWeight: 'bold',
@@ -41,6 +50,7 @@ export default StyleSheet.create({
 		fontWeight: '400',
 		color: '#A9A9A9',
 	},
+
 	image_scan: {
 		width: '30%',
 		height: '30%',
@@ -50,13 +60,14 @@ export default StyleSheet.create({
 		justifyContent: 'center',
 		alignItems: 'center',
 		opacity: 0.3,
-		// mettre au centre l'image
 	},
+
 	image_ecoscore: {
-		width: "100%",
+		maxWidth: 70,
+		maxHeight: 50,
+		width: 70,
+		height: 50,
 		resizeMode: 'contain',
-		//mettre tout en haut l'image
-		justifyContent: 'center',
-		alignItems: 'center',
+		top: 10,
 	}
 });

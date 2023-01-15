@@ -47,7 +47,7 @@ const DropDown = (props: any) => {
   }
   return (
     <BottomSheetModal
-      ref={props.bottomSheetModalRef}
+    ref={props.bottomSheetModalRef}
       snapPoints={props.snapPoints}
       onChange={props.handleSheetChange}
       enablePanDownToClose={true}
@@ -57,18 +57,20 @@ const DropDown = (props: any) => {
           style={styles.image}
           source={{ uri: props.productData?.product?.image_url  == null ? errorImg : props.productData?.product?.image_url, cache: 'only-if-cached'}}
         />
-        <View style={styles.productInfosContainer}>
-          <Text style={styles.productBrand}>
-            {uppercaseFirstLetter(props.productData?.product.brands_tags[0])}
-          </Text>
-          <Text style={styles.productName}>
-            {props.productData?.product?.product_name_fr ? uppercaseFirstLetter(props.productData?.product?.product_name_fr) : "Nom inconnu"}
-          </Text>
-        <Image
-          style={styles.image_ecoscore}
-          source={imageEcoScore}
-        />
-        </View>
+          <View style={styles.productContainer}>
+            <View style={styles.productInfosContainer}>
+              <Text style={styles.productBrand}>
+                {uppercaseFirstLetter(props.productData?.product.brands_tags[0])}
+              </Text>
+              <Text style={styles.productName}>
+                {props.productData?.product?.product_name_fr ? uppercaseFirstLetter(props.productData?.product?.product_name_fr) : "Nom inconnu"}
+              </Text>
+            </View>
+            <Image
+            style={styles.image_ecoscore}
+            source={imageEcoScore}
+            />
+          </View>
       </View>
     </BottomSheetModal>
   );

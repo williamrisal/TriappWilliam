@@ -64,11 +64,6 @@ const DropDown = (props: any) => {
           <Text style={styles.productName}>
             {props.productData?.product?.product_name_fr ? uppercaseFirstLetter(props.productData?.product?.product_name_fr) : "Nom inconnu"}
           </Text>
-          {/* <View style={{ width: "10%", flex: 1 }}>
-            <SvgUri
-              uri= {"https://static.openfoodfacts.org/images/attributes/ecoscore-" + props.productData?.product?.ecoscore_data.grade + ".svg"}
-            />
-          </View> */}
         <Image
           style={styles.image_ecoscore}
           source={imageEcoScore}

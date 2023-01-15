@@ -53,8 +53,10 @@ export default StyleSheet.create({
 		// mettre au centre l'image
 	},
 	image_ecoscore: {
-		width: "50%",
-		marginTop: "-31%",
+		width: "100%",
 		resizeMode: 'contain',
+		//mettre tout en haut l'image
+		justifyContent: 'center',
+		alignItems: 'center',
 	}
 });

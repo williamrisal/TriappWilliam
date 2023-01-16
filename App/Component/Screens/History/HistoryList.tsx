@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { View, Text, Image, Pressable, Modal, Button } from 'react-native';
+import { View, Text, Image, Pressable, Modal, Button, ActivityIndicator } from 'react-native';
 import { AxiosResponse } from 'axios';
 
 import styles from '../../../Style/History.style';
@@ -29,14 +29,15 @@ const HistoryListItem = (props: any) => {
 	const [loading, setLoading] = useState(false);
 
 	const getProductInfos = async (data: string) => {
-		setLoading(true);
 		await getProductCode(data)
 			.then((response: AxiosResponse) => {
 				setdata(response.data);
+				setLoading(true);
 			})
 			.catch(error => {
 				console.log("error => ", error);
 				setErrorU(true);
+				setLoading(true);
 			});
 	};
 
@@ -51,23 +52,32 @@ const HistoryListItem = (props: any) => {
 
 	if ((props.x == 0 && props.codeBarre == ""))
 		return <View/>;
-
 	return (
 		<View style={styles.HistoryListItems}>
 			{loading ? (
-				<Image
+				dataItem?.product?.image_url ? (
+					<Image
 					source={{ uri: dataItem?.product?.image_url ? dataItem?.product?.image_url : 'https://cdn-icons-png.flaticon.com/512/3445/3445741.png'}}
 					style={styles.ImageItemScanned}
 				/>
+				) : (
+					<ActivityIndicator
+						style={{width: 90, height: 90, top: 10, left: 8}} 
+						size="large" 
+						color="green" 
+					/>
+				)
 			) : ( <Image style={[styles.ImageItemScanned, styles.skeletonScreen]} /> )}
 			<View style={styles.InfoItemScanned}>
 				{loading ? (
 					<View style={styles.textItem}>
 						<Text style={{fontWeight: "600",}}>
-							{dataItem?.product?.product_name ? dataItem?.product.product_name : dataItem?.product?.brands ? dataItem?.product.brands : "Bientot"}
+						{dataItem?.product?.product_name ? dataItem?.product.product_name : dataItem?.product?.brands ? dataItem?.product.brands : "Chargement"}
 						</Text>
-						<Text style={{fontWeight: "300", left: 2,}}>
-							{getNameCompagny(dataItem?.product?.brands ? dataItem?.product.brands : 'A venir..')}
+						<Text style={{fontWeight: "300", top: 2, left: 2,}}>
+							{getNameCompagny(dataItem?.product?.brands ? dataItem?.product.brands : 'En cour...')}
+						</Text>
+						<Text>
 						</Text>
 					</View>
 				) : (
@@ -81,20 +91,20 @@ const HistoryListItem = (props: any) => {
 						<Pressable
 							onPress={() => setModalVisible(true)}
 							style={({ pressed }) => [{
-								opacity: pressed ? 0.5 : 1,
+								opacity: pressed ? 0.3 : 1,
 							},]}
 						>
 							{({ pressed }) => (
 								<Image
-									source={{ uri: 'https://cdn-icons-png.flaticon.com/512/4066/4066676.png' }}
+									source={{ uri: 'https://cdn-icons-png.flaticon.com/512/9364/9364651.png' }}
 									style={styles.iconSubmit}
 								/>
 							)}
 						</Pressable> 
 					) : (
 						<Image
-							source={{ uri: 'https://cdn-icons-png.flaticon.com/512/738/738884.png' }}
-							style={styles.iconSubmit}
+							source={{ uri: 'https://cdn-icons-png.flaticon.com/512/7269/7269174.png' }}
+							style={{zIndex: 2, width: 24, height: 24, left: 3}}
 						/>
 					))}
 				</View>

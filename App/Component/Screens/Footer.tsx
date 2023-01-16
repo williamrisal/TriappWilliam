@@ -15,7 +15,7 @@ export const Footer = (props: any) => {
 				{({ pressed }) => (
 					<Image
 						style={{height: 40, width: 40,}}
-						source={{uri:'https://cdn-icons-png.flaticon.com/512/1800/1800170.png'}}
+						source={{uri:'https://cdn-icons-png.flaticon.com/512/4716/4716509.png'}}
 					/>
 				)}
 			</Pressable>
@@ -26,8 +26,8 @@ export const Footer = (props: any) => {
 			>
 				{({ pressed }) => (
 					<Image
-						style={{height: 35, width: 35,}}
-						source={{uri:'https://cdn-icons-png.flaticon.com/512/3126/3126504.png'}}
+						style={{height: 50, width: 50,}}
+						source={{uri:'https://cdn-icons-png.flaticon.com/512/507/507960.png'}}
 					/>
 				)}
 			</Pressable>
@@ -39,7 +39,7 @@ export const Footer = (props: any) => {
 					{({ pressed }) => (
 					<Image
 						style={{height: 40, width: 40,}}
-						source={{uri:'https://cdn-icons-png.flaticon.com/512/125/125279.png'}}
+						source={{uri:'https://cdn-icons-png.flaticon.com/512/900/900797.png'}}
 					/>
 				)}
 			</Pressable>

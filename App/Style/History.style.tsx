@@ -31,12 +31,14 @@ export default StyleSheet.create({
 	},
 	//View Message d'Historique (scanne)
 	HistoryInfo: {
-		backgroundColor: 'rgba(44, 140, 28, .7)',
+		backgroundColor: 'rgba(30, 130, 30, .7)',
 
 		width: '100%',
 		height: 335,
 
 		flexDirection: 'column',
+		borderBottomColor: 'rgba(00, 150, 00, .3)',
+		borderBottomWidth: 3,
 	},
 	HistoryInfoCase: {
 		flexDirection: 'row',
@@ -66,7 +68,9 @@ export default StyleSheet.create({
 		
 		marginTop: 1,
 		borderBottomWidth: 0.25,
-		borderColor: 'rgba(44, 140, 28, .4)',
+		borderColor: 'rgba(44, 140, 28, .2)',
+		borderBottomLeftRadius: 70,
+		borderBottomRightRadius: 70,
 	},
 	//ImageItemScanned
 	ImageItemScanned: {
@@ -74,6 +78,7 @@ export default StyleSheet.create({
 		height: 'auto',
 		maxHeight: 90,
 		resizeMode: 'contain',
+
 
 		marginTop: 10,
 		left: 5,
@@ -89,17 +94,20 @@ export default StyleSheet.create({
 	textItem: {
 		position: 'absolute',
 		zIndex: 1,
+
+		height: 60,
+		width: 260,
 	},
 	submit: {
 		position: 'absolute',
 		zIndex: 2,
-		top: 55,
-		left: (Dimensions.get('window').width / 1.7),
+		top: 65,
+		left: (Dimensions.get('window').width / 1.65),
 	},
 	iconSubmit: {
 		zIndex: 2,
-		width: 40,
-		height: 40,
+		width: 30,
+		height: 30,
 	},
 	skeletonScreen: {
 		backgroundColor: 'rgba(216, 216, 216, .7)',

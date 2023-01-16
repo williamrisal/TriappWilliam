@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { View, Text, Image, Pressable } from 'react-native';
+import { LinearGradient } from 'react-native-linear-gradient';
 
 import styles from '../../../Style/History.style';
 

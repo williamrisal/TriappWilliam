@@ -15,9 +15,9 @@ const HistoryListMore = (props: any) => {
 			animationType="slide"
     	 	presentationStyle="pageSheet"
 		>
-    		<View>
+    		<>
         		<Button title="Fermer" onPress={() => props.set(false)} />
-    		</View>
+    		</>
   		</Modal>
 	);
 }

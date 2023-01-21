@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { View, Text, ScrollView, RefreshControl, StatusBar } from 'react-native';
+import { View, Text, ScrollView, RefreshControl, StatusBar, Pressable, Image } from 'react-native';
 import { useAsyncStorage } from '@react-native-async-storage/async-storage';
 
 import styles from '../../../Style/History.style';
@@ -11,7 +11,7 @@ import { HistoryList } from './HistoryList';
 const HistoryHeader = () => {
     return (
         <View style={styles.HistoryHeader}>
-            <Text style={{ fontWeight: "100", fontSize: 35, left: 30, top: 15,}}>Historique</Text>
+            <Text style={{ fontWeight: "bold", fontSize: 30, left: 20, top: 20, color: 'whitesmoke'}}>Historique</Text>
         </View>
   );
 }
@@ -22,7 +22,7 @@ export const History = () => {
 	const [value, setValue] = useState(null);
 	const takeItemFromStorage = async () => setValue(await getItem());
     const [refreshing, setRefreshing] = useState(false);
-    const [statusBar, setStatusBar] = useState(false);
+    const [statusBar, setStatusBar] = useState(true);
 
     const onRefresh = React.useCallback(() => {
         setRefreshing(true);
@@ -34,11 +34,11 @@ export const History = () => {
 
     const handleScroll = (event: any) => {
         if (event.nativeEvent.contentOffset.y < 335) {
-            setStatusBar(false);
+            setStatusBar(true);
             setShowComponentHeader(false);
         }
         if (event.nativeEvent.contentOffset.y > 400) {
-            setStatusBar(true);
+            setStatusBar(false);
             setShowComponentHeader(true);
         }
     }
@@ -69,8 +69,8 @@ export const History = () => {
                 />
               }
             >
-                <HistoryInfo value={value}/>
-                <HistoryList value={value}/>
+                <HistoryInfo value={value} />
+                <HistoryList value={value} />
             </ScrollView>
         </View>
     );

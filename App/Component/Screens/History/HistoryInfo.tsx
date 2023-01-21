@@ -46,7 +46,7 @@ export const HistoryInfo = (props: any) => {
 			(x, i) => value += 1 );
 		String(props.value)?.length == 14 && (value--);
 		setArticle(value);
-		setArticleRecyclable(value); // a Faire
+		setArticleRecyclable(7); //a faire
 	}
 	
 	useEffect(() => {

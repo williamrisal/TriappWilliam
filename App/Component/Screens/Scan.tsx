@@ -12,6 +12,7 @@ import { BottomSheetModalProvider, BottomSheetModal } from '@gorhom/bottom-sheet
 import { uppercaseFirstLetter } from '../Utils/uppercaseFirstLetter';
 import { Product } from '../Models/ProductInfo';
 import { getProductCode } from '../Services/getProductCode';
+import { getTrashColor } from '../Services/getTrashColor';
 
 import styles from '../../Style/Scan.style';
 
@@ -28,7 +29,7 @@ const DropDown = (props: any) => {
   // }
   const grade = props.productData?.product?.ecoscore_data.grade;
   let imageEcoScore = require('../../Assets/EcoScore/ecoscore-unknown.png');
-  
+  getTrashColor(props);
   switch (grade) {
     case 'a':
       imageEcoScore = require('../../Assets/EcoScore/ecoscore-a.png');
@@ -162,7 +163,6 @@ export const Scan = () => {
                 />
             </BottomSheetModalProvider>
             
-            <View />
           </View>
         )}
     </View>

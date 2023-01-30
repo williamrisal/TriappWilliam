@@ -5,7 +5,6 @@ export default StyleSheet.create({
 		height: '100%',
 		width: '100%',
 	},
-
 	sheetContainer: {
 		flex: 1,
 		padding: 24,
@@ -14,12 +13,24 @@ export default StyleSheet.create({
 	},
 
 	sheetHeader: {
-		height: 180,
+		height: '100%',
+		width: '100%',
+		flexDirection: 'column',
+	},
+	sheetHeaderInfo: {
+		height: 170,
 		width: '100%',
 		flexDirection: 'row',
 		padding: 16,
 	},
+	sheetHeaderInfoDetail: {
+		height: '100%',
+		width: '100%',
+		flexDirection: 'column',
 
+		borderWidth: 3,
+		borderColor: 'blue',
+	},
 	image: {
 		maxWidth: 120,
 		maxHeight: 120,
@@ -28,7 +39,6 @@ export default StyleSheet.create({
 		resizeMode: 'contain',
 		borderRadius: 5,
 	},
-
 	productInfosContainer: {
 		height: 70,
 		width: '100%',
@@ -39,18 +49,17 @@ export default StyleSheet.create({
 		flexDirection: 'column',
 		marginTop: 10,
 		marginLeft: 20,
+
 	},
 	productName: {
 		fontSize: 20,
 		fontWeight: 'bold',
 	},
-
 	productBrand: {
 		fontSize: 14,
 		fontWeight: '400',
 		color: '#A9A9A9',
 	},
-
 	image_scan: {
 		width: '30%',
 		height: '30%',
@@ -61,13 +70,4 @@ export default StyleSheet.create({
 		alignItems: 'center',
 		opacity: 0.3,
 	},
-
-	image_ecoscore: {
-		maxWidth: 70,
-		maxHeight: 50,
-		width: 70,
-		height: 50,
-		resizeMode: 'contain',
-		top: 10,
-	}
 });

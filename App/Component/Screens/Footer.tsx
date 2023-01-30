@@ -13,10 +13,12 @@ export const Footer = (props: any) => {
 				opacity: pressed ? 0.5 : 1, },]}
 			>
 				{({ pressed }) => (
-					<Image
-						style={{height: 40, width: 40,}}
-						source={{uri:'https://cdn-icons-png.flaticon.com/512/1800/1800170.png'}}
-					/>
+					<View style={props.value == 0 ? [styles.status, styles.statusOn] : styles.status}>
+						<Image
+							style={styles.imgStatus}
+							source={{uri:'https://cdn-icons-png.flaticon.com/512/4716/4716509.png'}}
+						/>
+					</View>
 				)}
 			</Pressable>
 			<Pressable
@@ -25,24 +27,29 @@ export const Footer = (props: any) => {
 				opacity: pressed ? 0.5 : 1, },]}
 			>
 				{({ pressed }) => (
-					<Image
-						style={{height: 35, width: 35,}}
-						source={{uri:'https://cdn-icons-png.flaticon.com/512/3126/3126504.png'}}
-					/>
+					<View style={props.value == 1 ? [styles.status, styles.statusOn] : styles.status}>
+						<Image
+							style={styles.imgStatus}
+							source={{uri:'https://cdn-icons-png.flaticon.com/512/507/507960.png'}}
+						/>
+					</View>
 				)}
 			</Pressable>
 			<Pressable
 				onPress={() => props.setValue(2)}
 				style={({ pressed }) => [{
 				opacity: pressed ? 0.5 : 1, },]}
-				>
-					{({ pressed }) => (
-					<Image
-						style={{height: 40, width: 40,}}
-						source={{uri:'https://cdn-icons-png.flaticon.com/512/125/125279.png'}}
-					/>
+			>
+				{({ pressed }) => (
+					<View style={props.value == 2 ? [styles.status, styles.statusOn] : styles.status}>
+						<Image
+							style={styles.imgStatus}
+							source={{uri:'https://cdn-icons-png.flaticon.com/512/900/900797.png'}}
+						/>
+					</View>
 				)}
 			</Pressable>
 		</View>
   	);
 };
+

@@ -1,6 +1,6 @@
 import whatcolortrash from '../../Data/whatcolortrash.json';
 
-export const getTrashColor = (trash: any): string => {
+export const getTrashColor = (trash: any) => {
     let packaging = {};
 
     if (trash.productData?.product?.ecoscore_data?.adjustments?.packaging?.non_recyclable_and_non_biodegradable_materials == 1 && trash.productData?.product?.ecoscore_data?.adjustments?.packaging?.warning ) {

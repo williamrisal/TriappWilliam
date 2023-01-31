@@ -18,5 +18,5 @@ export const getTrashColor = (trash: any) => {
             }
         }
     }
-
+    return (packaging);
 }

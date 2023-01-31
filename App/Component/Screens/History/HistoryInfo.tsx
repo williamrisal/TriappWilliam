@@ -10,16 +10,14 @@ const Smiley = (props: any) => {
 	const smileyLinkC = require("../../../Assets/SmileyHistorique/smileyCian.png");
 	const smileyLinkV = require("../../../Assets/SmileyHistorique/smileyVert.png");
 	const tabSmiley = [smileyLinkR, smileyLinkB, smileyLinkJ, smileyLinkC, smileyLinkV];
-	
+
 	const res = (props.articleRecycled / props.articleScan) * 100;
 	var smielyChose = 0;
-	
+
 	for (let i = 0, j = 0; (i < 5); i++, j += 20)
 		if (res > j && res <= j + 20 && (smielyChose = i))
 			break;
-	return (
-		<Image source={tabSmiley[smielyChose]} style={styles.Smiley} />
-	);
+	return ( <Image source={tabSmiley[smielyChose]} style={styles.Smiley} /> );
 }
 
 export const HistoryInfo = (props: any) => {
@@ -32,7 +30,7 @@ export const HistoryInfo = (props: any) => {
 
 		if (props.value == null)
 			return;
-		String(props.value)?.split(" ").reverse().map( (x, i) => value += 1 );
+		String(props.value)?.split(" ").reverse().map((x, i) => value += 1);
 		setArticle(value);
 		setArticleRecyclable(value); //a faire
 	}
@@ -43,15 +41,17 @@ export const HistoryInfo = (props: any) => {
 	return (
 		<View style={styles.HistoryInfo}>
 			<View style={styles.HistoryInfoCase}>
-			{ article > 0 ? ( <>
-				<View style={{ width: 150, }}>
-						<Text style={styles.text1}>Vous avez Scanner</Text>
-						<Text style={styles.text2}> {article} Article </Text>
-				</View>
-				<View style={{ left: "35%", top: 80 }}>
-					<Smiley articleScan={article} articleRecycled={articleRecyclable} />
-				</View>
-			</> ) :
+			{ article > 0 ? (
+			    <>
+					<View style={{ width: 150, }}>
+							<Text style={styles.text1}>Vous avez Scanner</Text>
+							<Text style={styles.text2}> {article} Article </Text>
+					</View>
+					<View style={{ left: "35%", top: 80 }}>
+						<Smiley articleScan={article} articleRecycled={articleRecyclable} />
+					</View>
+			    </>
+				) :
 				<View style={styles.Oscan}>
 					<Text style={styles.OscanText1}>Bienvenue dans l'historique ✌🏼</Text>
 					<Text style={styles.OscanText2}>Vous n'avais pas scanner d'article pour le moment</Text>

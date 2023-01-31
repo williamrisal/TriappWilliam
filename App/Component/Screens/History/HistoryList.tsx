@@ -18,7 +18,6 @@ const HistoryListMore = (props: any) => {
 		>
         	<Button title="Fermer" onPress={() => props.set(false)} />
 			<InfoScan data={props}/>
-			 
   		</Modal>
 	);
 }
@@ -43,7 +42,6 @@ const HistoryListItem = (props: any) => {
 		getProductInfos(props.codeBarre);
 	}, []);
 	
-	
 	const getNameCompagny = (data: any) => {
 		const arrayCompagny = data != undefined ? data.split(',') : "null,".split(',');
 		return (arrayCompagny[0] == "null" ? "" : arrayCompagny[0]);
@@ -64,7 +62,7 @@ const HistoryListItem = (props: any) => {
 				) : (
 					<ActivityIndicator style={styles.activityI} size="large" color="green" />
 				)
-			) : ( 
+			) : (
 				<Image style={[styles.ImageItemScanned, styles.skeletonScreen]} />
 			)}
 			<View style={styles.InfoItemScanned}>
@@ -85,15 +83,15 @@ const HistoryListItem = (props: any) => {
 							onPress={() => setModalVisible(true)}
 							style={({ pressed }) => [{
 								opacity: pressed ? 0.3 : 1,
-							},]}
+							}]}
 						>
 							{({ pressed }) => (
 								<Image
-									source={{ uri: 'https://cdn-icons-png.flaticon.com/512/9364/9364651.png' }}
+						     		source={{ uri: 'https://cdn-icons-png.flaticon.com/512/9364/9364651.png' }}
 									style={styles.iconSubmit}
 								/>
 							)}
-						</Pressable> 
+						</Pressable>
 					) : (
 						<Image
 							source={{ uri: 'https://cdn-icons-png.flaticon.com/512/7269/7269174.png' }}

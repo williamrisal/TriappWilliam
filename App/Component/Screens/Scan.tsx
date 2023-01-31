@@ -9,7 +9,6 @@ import { BottomSheetModalProvider, BottomSheetModal } from '@gorhom/bottom-sheet
 import { uppercaseFirstLetter } from '../Utils/uppercaseFirstLetter';
 import { Product } from '../Models/ProductInfo';
 import { getProductCode } from '../Services/getProductCode';
-import { getTrashColor } from '../Services/getTrashColor';
 import { InfoScan } from './InfoScan';
 
 import styles from '../../Style/Scan.style';
@@ -25,10 +24,8 @@ const DropDown = (props: any) => {
 	let errorImg = 'https://www.batirama.com/scaled/983/755/1/2017/08/31/125459/images/article/15082-_00erreur.jpg';
 
 	// if (props.productData && props.productData.product && props.productData.product.ecoscore_data) {
-	// grade = props.productData.product.ecoscore_data.grade;
+	//     grade = props.productData.product.ecoscore_data.grade;
 	// }
-
-	getTrashColor(props);
 
 	return (
 		<BottomSheetModal
@@ -58,6 +55,7 @@ const DropDown = (props: any) => {
 				<View style={styles.sheetHeaderInfoDetail}>
 					<ScrollView> 
 						<InfoScan data={props}/>
+
 					</ScrollView>
 				</View>
 			</View>

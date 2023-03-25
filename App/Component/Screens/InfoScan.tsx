@@ -1,43 +1,25 @@
-import React from 'react';
-import {View, Text, Image } from 'react-native';
-
+import React, { useState, useEffect } from 'react';
+import { View, Text } from 'react-native';
 import { getTrashColor } from '../Services/getTrashColor';
-import styles from '../../Style/InfoScan.style';
 
 export const InfoScan = (props: any) => {
-	const grade = props.productData?.product?.ecoscore_data.grade;
-	let imageEcoScore = require('../../Assets/EcoScore/ecoscore-unknown.png');
-	switch (grade) {
-		case 'a':
-			imageEcoScore = require('../../Assets/EcoScore/ecoscore-a.png');
-			break;
-		case 'b':
-			imageEcoScore = require('../../Assets/EcoScore/ecoscore-b.png');
-			break;
-		case 'c':
-			imageEcoScore = require('../../Assets/EcoScore/ecoscore-c.png');
-			break;
-		case 'd':
-			imageEcoScore = require('../../Assets/EcoScore/ecoscore-d.png');
-			break;
-		default:
-			break;
-	}
-	console.log(getTrashColor(props));
+  const [infoProductData, infoSetProductData] = useState<string>("rien");
 
-  	return (
-    	<View>
-			<Image style={styles.image_ecoscore} source={imageEcoScore} />
+  useEffect(() => {
+    const trashColorData = getTrashColor(props);
+    if (trashColorData !== infoProductData) {
+      if (trashColorData === "nodata" || !trashColorData) {
+        infoSetProductData("Oups, Je suis comme une bibliothèque sans livres, je n'ai pas les informations que vous cherchez !");
+      } else {
+        infoSetProductData(trashColorData);
+      }
+    }
+  }, [props]);
 
-			<Text></Text>
-			<Text>test</Text>
-			<Text>test</Text>
-			<Text>test</Text>
-			<Text>test</Text>
-			<Text>test</Text>
-			<Text>test</Text>
-			<Text>test</Text>
-			<Text>test</Text>
-		</View>
-  	);
+  return (
+    <View>
+      <Text></Text>
+      <Text>{infoProductData}</Text>
+    </View>
+  );
 };

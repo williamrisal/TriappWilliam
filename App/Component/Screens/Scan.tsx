@@ -10,9 +10,9 @@ import { uppercaseFirstLetter } from '../Utils/uppercaseFirstLetter';
 import { Product } from '../Models/ProductInfo';
 import { getProductCode } from '../Services/getProductCode';
 import { InfoScan } from './InfoScan';
-
-import styles from '../../Style/Scan.style';
 import { ScrollView } from 'react-native-gesture-handler';
+import styles from '../../Style/Scan.style';
+
 
 interface scannedProps {
 	type: string;
@@ -25,7 +25,25 @@ const DropDown = (props: any) => {
 
 	// if (props.productData && props.productData.product && props.productData.product.ecoscore_data) {
 	//     grade = props.productData.product.ecoscore_data.grade;
-	// }
+	// }	let imageEcoScore = require('../../Assets/EcoScore/ecoscore-unknown.png');
+	const grade = props.productData?.product?.ecoscore_data.grade;
+	let imageEcoScore = require('../../Assets/EcoScore/ecoscore-unknown.png');
+	switch (grade) {
+		case 'a':
+			imageEcoScore = require('../../Assets/EcoScore/ecoscore-a.png');
+			break;
+		case 'b':
+			imageEcoScore = require('../../Assets/EcoScore/ecoscore-b.png');
+			break;
+		case 'c':
+			imageEcoScore = require('../../Assets/EcoScore/ecoscore-c.png');
+			break;
+		case 'd':
+			imageEcoScore = require('../../Assets/EcoScore/ecoscore-d.png');
+			break;
+		default:
+			break;
+	}
 
 	return (
 		<BottomSheetModal
@@ -49,7 +67,8 @@ const DropDown = (props: any) => {
 								{props.productData?.product?.product_name_fr ? uppercaseFirstLetter(props.productData?.product?.product_name_fr) : "Nom inconnu"}
 							</Text>
 						</View>
-						<Text> info... </Text>
+						<Image style={styles.image_ecoscore} source={imageEcoScore} />
+
 					</View>
 				</View>
 				<View style={styles.sheetHeaderInfoDetail}>

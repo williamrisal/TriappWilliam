@@ -1,5 +1,4 @@
 import { StyleSheet } from 'react-native';
-
 export default StyleSheet.create({
 	container: {
 		height: '100%',
@@ -70,4 +69,12 @@ export default StyleSheet.create({
 		alignItems: 'center',
 		opacity: 0.3,
 	},
+	image_ecoscore: {
+		maxWidth: 70,
+		maxHeight: 50,
+		width: 70,
+		height: 50,
+		resizeMode: 'contain',
+		top: 10,
+	}
 });

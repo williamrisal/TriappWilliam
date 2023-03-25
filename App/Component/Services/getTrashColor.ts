@@ -2,10 +2,13 @@ import whatcolortrash from '../../Data/whatcolortrash.json';
 
 export const getTrashColor = (trash: any) => {
     let packaging = {};
-    if (trash.data?.productData?.product?.ecoscore_data?.adjustments?.packaging?.non_recyclable_and_non_biodegradable_materials == 1 && trash.productData?.product?.ecoscore_data?.adjustments?.packaging?.warning ) {
+
+    if (trash.data?.productData?.product?.ecoscore_data?.adjustments?.packaging?.non_recyclable_and_non_biodegradable_materials == 1 && trash.data?.productData?.product?.ecoscore_data?.adjustments?.packaging?.warning) {
         Object.assign(packaging, {"all": "nodata"});
+        return ("nodata");
+
     }
-    else if (trash.data?.productData?.product?.ecoscore_data?.adjustments?.packaging?.non_recyclable_and_non_biodegradable_materials == 1) {
+    else if (trash.data?.productData?.product?.ecoscore_data?.adjustments?.packaging?.non_recyclable_and_non_biodegradable_materials == 1 && !trash.data?.productData?.product?.ecoscore_data?.adjustments?.packaging?.warning ) {
         Object.assign(packaging, {"all": "Marron"});
     }
     else {

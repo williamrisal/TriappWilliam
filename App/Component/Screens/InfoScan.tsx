@@ -9,7 +9,7 @@ export const InfoScan = (props: any) => {
     const trashColorData = getTrashColor(props);
     if (trashColorData !== infoProductData) {
       if (trashColorData === "nodata" || !trashColorData) {
-        infoSetProductData("Oups, Je suis comme une bibliothèque sans livres, je n'ai pas les informations que vous cherchez !");
+        infoSetProductData("Je suis désolé, monsieur/madame, mais ma mémoire m'a fait faux bond. Les informations que vous cherchez ne sont pas là.");
       } else {
         infoSetProductData(trashColorData);
       }

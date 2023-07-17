@@ -61,7 +61,7 @@ const DropDown = (props: any) => {
 					<View style={styles.productContainer}>
 						<View style={styles.productInfosContainer}>
 							<Text style={styles.productBrand}>
-								{uppercaseFirstLetter(props.productData?.product.brands_tags[0])}
+								{props.productData?.product.brands_tags[0] ? uppercaseFirstLetter(props.productData?.product.brands_tags[0]) : null}
 							</Text>
 							<Text style={styles.productName}>
 								{props.productData?.product?.product_name_fr ? uppercaseFirstLetter(props.productData?.product?.product_name_fr) : "Nom inconnu"}
@@ -90,11 +90,15 @@ export const Scan = () => {
 	const getBarCodeScannerPermissions = async () => {	
 		const { status } = await BarCodeScanner.requestPermissionsAsync();
 		setHasPermission(status == 'granted');
+		if (status !== 'granted') {
+			console.log('Permission denied');
+			return;
+		}
 	};
 	useEffect(() => {
 		getBarCodeScannerPermissions();
-		
 	}, []);
+
 
 	// recupere via l'api les info du code barre
 	const [scanned, setScanned] = useState(false);
@@ -103,7 +107,8 @@ export const Scan = () => {
 		setScanned(true);
 		await getProductCode(data)
 		.then((response: AxiosResponse) => {
-			setProductData(response.data);
+			console.log('Response Scan: ', response);
+			setProductData(response);
 			handlePresentModalPress();
 		})
 		.catch(error => {
@@ -133,20 +138,36 @@ export const Scan = () => {
 
 	const snapPoints = useMemo(() => ['60%'], []);
 
-	const handleBarCodeScanned = async ({ type , data }: scannedProps) => {	
+	const handleBarCodeScanned = async ({ type, data }: scannedProps) => {
 		if (!data.match(/[a-z]/i)) {
-			setScanned(true);
-			getProductInfos(data);
-			setStorageHistory(data);
-		} else
-			return(undefined);
-	};
 
-	if (hasPermission === null || !hasPermission)
-		return ( <>
+		  getProductInfos(data);
+		  setScanned(true);
+		  setStorageHistory(data);
+		} else {
+		  return undefined;
+		}
+	  };
+
+	if (hasPermission === null) {
+		// En attente de l'obtention des autorisations
+		console.log('Requesting for camera permission');
+		return (
+		  <>
 			<Text>Requesting for camera permission</Text>
+		  </>
+		);
+	  }
+	
+	  if (!hasPermission) {
+		// Autorisations refusées
+		console.log('No access to camera');
+		return (
+		  <>
 			<Text>No access to camera</Text>
-		</> );
+		  </>
+		);
+	  }
 	return (
 		<View style={styles.container}>
 			<View style={styles.sheetContainer}>

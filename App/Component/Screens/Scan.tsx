@@ -112,7 +112,7 @@ export const Scan = () => {
 	};
 
 	// ajouter le nouveau code barre a la liste de tout les code barre scanne
-	const { getItem, setItem } = useAsyncStorage('@storageHistory03');
+	const { getItem, setItem } = useAsyncStorage('@storage');
 	const setStorageHistory = async (data: any) => {	
 		const listCodeBarre = await getItem();
 		const itemParsed = listCodeBarre?.slice(listCodeBarre.lastIndexOf(' ') + 1, listCodeBarre?.length);

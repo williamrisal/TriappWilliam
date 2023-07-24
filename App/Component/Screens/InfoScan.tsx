@@ -11,7 +11,7 @@ export const InfoScan = (props: any) => {
       if (trashColorData === "nodata" || !trashColorData) {
         infoSetProductData("Je suis désolé, monsieur/madame, mais ma mémoire m'a fait faux bond. Les informations que vous cherchez ne sont pas là.");
       } else {
-        infoSetProductData(trashColorData);
+        infoSetProductData("rien");
       }
     }
   }, [props]);

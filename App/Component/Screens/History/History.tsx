@@ -11,7 +11,7 @@ import { HistoryList } from './HistoryList';
 export const History = () => {
 
     // recuperer se qui et stocker dans asyncStorage
-    const { getItem } = useAsyncStorage('@storageHistory03');
+    const { getItem } = useAsyncStorage('@storage'); // path pour le stockage 
 	const [value, setValue] = useState(null);
 	const takeItemFromStorage = async () => setValue(await getItem());
     useEffect(() => {
@@ -28,7 +28,7 @@ export const History = () => {
         }, 1000);
     }, []);
     
-    // afficher le status bar (heur date wifi...), le header (Historique)
+    // Status bar (heur, date, wifi...), le header (Historique)
     const [showComponentHeader, setShowComponentHeader] = useState(false);
     const [statusBar, setStatusBar] = useState(true);
     const handleScroll = (event: any) => {

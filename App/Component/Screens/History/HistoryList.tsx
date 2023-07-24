@@ -10,15 +10,17 @@ import { InfoScan } from '../InfoScan';
 
 const HistoryListMore = (props: any) => {
 	return (
+		<>
 		<Modal
 			visible={props.visible}
 			onRequestClose={() => props.set(false)}
 			animationType="slide"
-    	 	presentationStyle="pageSheet"
-		>
+			presentationStyle="pageSheet"
+			>
         	<Button title="Fermer" onPress={() => props.set(false)} />
 			<InfoScan data={props}/>
   		</Modal>
+		</>
 	);
 }
 
@@ -107,10 +109,20 @@ const HistoryListItem = (props: any) => {
 
 export const HistoryList = (props: any) => {
 	return (
-		<View style={styles.HistoryList}>
-			{props.value != null && String(props.value).split(" ").reverse().map(
-				(x, i) => <HistoryListItem codeBarre={x} x={i} key={i} />
-			)}
-		</View>
+		<>
+			{props.value == null ?
+			<View style={styles.HistoryList} >
+				<Image
+					source={{ uri: 'https://magiedirecte.com/img/cms/plant-3751683_640.png' }}
+					style={{zIndex: 2, bottom: "0%", width: "100%", height: "100%"}}
+				/>
+			</View>
+			:
+			<View style={styles.HistoryList}>
+				{props.value != null && String(props.value).split(" ").reverse().map(
+					(x, i) => <HistoryListItem codeBarre={x} x={i} key={i} />
+				)}
+			</View>}
+		</>
 	);
 }

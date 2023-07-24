@@ -54,7 +54,7 @@ export const HistoryInfo = (props: any) => {
 				) :
 				<View style={styles.Oscan}>
 					<Text style={styles.OscanText1}>Bienvenue dans l'historique ✌🏼</Text>
-					<Text style={styles.OscanText2}>Vous n'avais pas scanner d'article pour le moment</Text>
+					<Text style={styles.OscanText2}>Vous n'avais pas scanner d'article pour le moment...</Text>
 				</View>
 			}
 			</View>

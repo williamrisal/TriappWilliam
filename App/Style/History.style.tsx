@@ -49,13 +49,13 @@ export default StyleSheet.create({
 	},
 	text1: {
 		left: '30%',
-		top:75,
+		bottom: "-50%",
 		color: 'white',
 		fontSize: 30,
 	},
 	text2: {
 		left: '27%',
-		top: 95,
+		top: "55%",
 		fontSize: 28,
 		color: 'white',
 		textDecorationLine: 'underline',
@@ -64,8 +64,9 @@ export default StyleSheet.create({
 		left: "11%",
 		color: 'white',
 		fontSize: 20,
-    	bottom: 0,
+    	bottom: "0%",
 	},
+
 	Oscan: {
 		width: 300,
 		left: '25%',

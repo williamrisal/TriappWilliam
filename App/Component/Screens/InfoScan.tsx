@@ -1,12 +1,14 @@
 import React, { useState, useEffect } from 'react';
 import { View, Text, StyleSheet } from 'react-native';
 import { getTrashColor } from '../Services/getTrashColor';
+import { getData } from '../Services/getData';
 
 export const InfoScan = (props: any) => {
   const [infoProductData, infoSetProductData] = useState<string>("rien");
 
   useEffect(() => {
     const trashColorData = getTrashColor(props);
+    const infoData = getData(props);
     if (trashColorData !== infoProductData) {
       if (trashColorData === "nodata" || !trashColorData) {
         infoSetProductData("Je suis désolé, monsieur/madame, mais ma mémoire m'a fait faux bond. Les informations que vous cherchez ne sont pas là.");
@@ -21,6 +23,7 @@ export const InfoScan = (props: any) => {
     <View>
       <View style={styles.textContainer}>
         <Text style={styles.text}>cette objet est dans la poubelle :{infoProductData[1]}</Text>
+
       </View>
     </View>
   );

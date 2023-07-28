@@ -113,6 +113,7 @@ export const Scan = () => {
 		})
 		.catch(error => {
 			console.log('Erreur Scan: ', error.data);
+			setProductData("undefined");
 		});
 	};
 

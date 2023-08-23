@@ -10,7 +10,11 @@ export default StyleSheet.create({
 		justifyContent: 'center',
 		zIndex: 1,
 	},
-
+	horizontalContainer: {
+		flexDirection: 'row',
+		alignItems: 'center', // Aligne les éléments verticalement au centre
+		justifyContent: 'center', // Aligne les éléments horizontalement au centre
+	  },
 	sheetHeader: {
 		height: '100%',
 		width: '100%',
@@ -26,9 +30,6 @@ export default StyleSheet.create({
 		height: '100%',
 		width: '100%',
 		flexDirection: 'column',
-
-		borderWidth: 3,
-		borderColor: 'blue',
 	},
 	image: {
 		maxWidth: 120,

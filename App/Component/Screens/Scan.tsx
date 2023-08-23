@@ -11,6 +11,7 @@ import { Product } from '../Models/ProductInfo';
 import { getProductCode } from '../Services/getProductCode';
 import { InfoScan } from './InfoScan';
 import { ScrollView } from 'react-native-gesture-handler';
+
 import styles from '../../Style/Scan.style';
 
 
@@ -67,8 +68,9 @@ const DropDown = (props: any) => {
 								{props.productData?.product?.product_name_fr ? uppercaseFirstLetter(props.productData?.product?.product_name_fr) : "Nom inconnu"}
 							</Text>
 						</View>
+						<View style={styles.horizontalContainer}>
 						<Image style={styles.image_ecoscore} source={imageEcoScore} />
-
+						</View>
 					</View>
 				</View>
 				<View style={styles.sheetHeaderInfoDetail}>
@@ -186,6 +188,12 @@ export const Scan = () => {
 			<BarCodeScanner
 				onBarCodeScanned={scanned ? undefined : handleBarCodeScanned}
 				style={StyleSheet.absoluteFillObject}
+			/>
+			<Button
+			onPress={() => {
+				handleBarCodeScanned({type: "EAN", data: "8024884601308"});
+			}}
+			title="Press Me"
 			/>
 		</View>
 	);

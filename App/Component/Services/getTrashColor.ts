@@ -16,7 +16,6 @@ export const getTrashColor = (trash: any) => {
             for (let item, j = 0; item = whatcolortrash.poubelles[j]; j++) {
                 if (item.exemples.includes(itempack.material)) {
                     packaging = [[itempack.shape],item.couleur];
-
                 }
             }
         }

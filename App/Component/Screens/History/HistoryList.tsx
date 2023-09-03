@@ -32,7 +32,8 @@ const HistoryListItem = (props: any) => {
 	const getProductInfos = async (data: string) => {
 		await getProductCode(data)
 		.then((response: AxiosResponse) => {
-			setdata(response.data);
+			console.log("Response Scan: ", response);
+			setdata(response);
 			setLoading(true);
 		})
 		.catch(error => {

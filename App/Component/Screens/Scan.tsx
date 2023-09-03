@@ -35,6 +35,7 @@ const DropDown = (props: any) => {
   const grade = props.productData?.product?.ecoscore_data.grade;
   let imageEcoScore = require("../../Assets/EcoScore/ecoscore-unknown.png");
 
+  console.log("grade", grade)
   switch (grade) {
     case "a":
       imageEcoScore = require("../../Assets/EcoScore/ecoscore-a.png");
@@ -87,7 +88,29 @@ const DropDown = (props: any) => {
               </Text>
             </View>
             <View style={styles.horizontalContainer}>
-              <Image style={styles.image_ecoscore} source={imageEcoScore} />
+              <Image style={styles.image_labels} source={imageEcoScore} />
+
+              {label.map((item, index) => {
+                if (item === "fr:triman") {
+                  return (
+                    <Image
+                      key={index}
+                      style={styles.image_labels}
+                      source={require("../../Assets/labels/logo_triman.png")}
+                    />
+                  );
+                } else if (item === "en:green-dot") {
+                  return (
+                    <Image
+                      key={index}
+                      style={styles.image_labels}
+                      source={require("../../Assets/labels/Green_dot.png")}
+                    />
+                  );
+                } else {
+                  return null;
+                }
+              })}
             </View>
           </View>
         </View>
@@ -206,7 +229,7 @@ export const Scan = () => {
       />
       <Button
         onPress={() => {
-          handleBarCodeScanned({ type: "EAN", data: "7622210449283" });
+          handleBarCodeScanned({ type: "EAN", data: "3017620422003" });
         }}
         title="Press Me"
       />

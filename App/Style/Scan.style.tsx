@@ -70,12 +70,11 @@ export default StyleSheet.create({
 		alignItems: 'center',
 		opacity: 0.3,
 	},
-	image_ecoscore: {
-		maxWidth: 70,
-		maxHeight: 50,
-		width: 70,
-		height: 50,
+	image_labels: {
+		width: 50,
+		height: 35,
 		resizeMode: 'contain',
 		top: 10,
-	}
+	},
+
 });

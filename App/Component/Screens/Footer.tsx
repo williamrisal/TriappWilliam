@@ -9,7 +9,7 @@ export const Footer = (props: any) => {
 	let logo1 = "https://cdn-icons-png.flaticon.com/512/4716/4716509.png";
 	let logo2 = "https://cdn-icons-png.flaticon.com/512/507/507960.png";
 	let logo3 = "https://cdn-icons-png.flaticon.com/512/900/900797.png";
-	var logo = [logo1, logo2, logo3];
+	var logo = [logo1, logo2];
 
   	return (
 		<View style={styles.sheetContainer}>

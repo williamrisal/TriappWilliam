@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Image,View, Text, StyleSheet } from 'react-native';
 import { getTrashColor } from '../Services/getTrashColor';
 
+
 export const InfoScan = (props: any) => {
   const [infoProductData, infoSetProductData] = useState();
 
@@ -31,7 +32,12 @@ export const InfoScan = (props: any) => {
           </Text>
         </View>
       </View>
-
+      <View>
+        <View>
+          <Text style={{color: 'black', }}>Empreinte Carbonne</Text>
+          <Text>test</Text>
+        </View>
+      </View>
     </View>
   );
 };
@@ -40,6 +46,7 @@ export const InfoScan = (props: any) => {
 const styles = StyleSheet.create({
   textContainer: {
     backgroundColor: 'black',
+    marginTop: '8%',
     padding: '4%',
     borderRadius: 5,
   },

@@ -41,11 +41,11 @@ export default function App() {
                   name="Scan" component={Scan}
                   options={{ tabBarStyle: { display: 'none' }, headerShown: false }}
                 />
-      case 2:
+      /*case 2:
         return <Tab.Screen // affichage Settings
                   name="Settings" component={Setting}
                   options={{ tabBarStyle: { display: 'none' }, headerShown: false }}
-                />
+                />*/
     }
   }
 

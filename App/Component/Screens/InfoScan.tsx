@@ -41,8 +41,8 @@ export const InfoScan = (props: any) => {
       </View>
       <View>
         <View>
-          <Text style={{color: 'black', }}>Empreinte Carbonne</Text>
-          <Text>{environementImpact}</Text>
+          <Text style={{color: 'black', }}>{"Équivaut à parcourir " + 767 / 191.75 + " km dans une voiture à essence"}</Text>
+          <Text>{environementImpact + "g de CO2 pour 100g de produit"}</Text>
         </View>
       </View>
     </View>

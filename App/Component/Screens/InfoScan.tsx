@@ -1,13 +1,20 @@
 import React, { useState, useEffect } from 'react';
 import { Image,View, Text, StyleSheet } from 'react-native';
 import { getTrashColor } from '../Services/getTrashColor';
+import { getEnvironementImpact } from '../Services/getEnvironementImpact';
 
 
 export const InfoScan = (props: any) => {
   const [infoProductData, infoSetProductData] = useState();
+  const [environementImpact, setEnvironementImpact] = useState();
 
   useEffect(() => {
     const trashColorData = getTrashColor(props);
+    setEnvironementImpact(getEnvironementImpact(props));
+    console.log("///////////////////////////")
+    getEnvironementImpact(props);
+    console.log("///////////////////////////")
+
     if (trashColorData !== infoProductData) {
       if (trashColorData === "nodata" || !trashColorData) {
         infoSetProductData("Je suis désolé, monsieur/madame, mais ma mémoire m'a fait faux bond. Les informations que vous cherchez ne sont pas là.");
@@ -35,7 +42,7 @@ export const InfoScan = (props: any) => {
       <View>
         <View>
           <Text style={{color: 'black', }}>Empreinte Carbonne</Text>
-          <Text>test</Text>
+          <Text>{environementImpact}</Text>
         </View>
       </View>
     </View>

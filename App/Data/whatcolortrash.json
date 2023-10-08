@@ -1,7 +1,7 @@
 {
     "poubelles": [
         {
-            "couleur": "yellow",
+            "couleur": "jaune",
             "description": "Emballages en verre, en métal et en plastique",
             "exemples": [
                 "en:pet-polyethylene-terephthalate",
@@ -142,7 +142,7 @@
             ]
         },
         {
-            "couleur": "blue",
+            "couleur": "Bleu",
             "description": "Papier et carton",
             "exemples": [
                 "en:Paper and cardboard",
@@ -161,7 +161,7 @@
             ]
         },
         {
-            "couleur": "gray",
+            "couleur": "Gris",
             "description": "Déchets ménagers et équipements",
             "exemples": [
                 "en:pp-bottle",
@@ -215,7 +215,7 @@
             ]
         },
         {
-            "couleur": "brown",
+            "couleur": "Marrons",
             "description": "Déchets organiques",
             "exemples": [
                 "en:green-dot",

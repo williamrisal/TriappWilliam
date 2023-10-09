@@ -75,15 +75,15 @@ const DropDown = (props: any) => {
               <Text style={styles.productBrand}>
                 {props.productData?.product.brands_tags[0]
                   ? uppercaseFirstLetter(
-                      props.productData?.product.brands_tags[0]
-                    )
+                    props.productData?.product.brands_tags[0]
+                  )
                   : null}
               </Text>
               <Text style={styles.productName}>
                 {props.productData?.product?.product_name_fr
                   ? uppercaseFirstLetter(
-                      props.productData?.product?.product_name_fr
-                    )
+                    props.productData?.product?.product_name_fr
+                  )
                   : "Nom inconnu"}
               </Text>
             </View>

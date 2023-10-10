@@ -16,6 +16,7 @@ const HistoryListMore = (props: any) => {
 				onRequestClose={() => props.set(false)}
 				animationType="slide"
 				presentationStyle="pageSheet"
+
 			>
 				<Button title="Fermer" onPress={() => props.set(false)} />
 				<InfoScan data={props} />

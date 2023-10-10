@@ -149,7 +149,6 @@ export const Scan = () => {
         handlePresentModalPress();
       })
       .catch((error) => {
-        console.log("Erreur Scan: ", error.data);
         setProductData("undefined");
       });
   };

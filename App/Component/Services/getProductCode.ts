@@ -9,7 +9,6 @@ export const getProductCode = (productCode: string): Promise<Product[]> => {
       return response.data;
     })
     .catch((error: AxiosError) => {
-      console.log(error);
       throw error; // Propage l'erreur pour une gestion ultérieure si nécessaire
     });
 };

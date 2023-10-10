@@ -2,12 +2,22 @@ import React, { useState, useEffect } from "react";
 import { Image, View, Text, StyleSheet } from "react-native";
 import { getTrashColor } from "../Services/getTrashColor";
 import { getEnvironementImpact } from "../Services/getEnvironementImpact";
+import { getEspeceMenace } from "../Services/getEspeceMenace";
+
+  const colorMap = {
+    bleu: 'blue',
+    vert: 'green',
+    marrons: 'brown',
+    jaune: 'yellow',
+    gris: 'grey',
+  };
 
 export const InfoScan = (props: any) => {
   const [infoProductData, infoSetProductData] = useState();
   const [environementImpact, setEnvironementImpact] = useState();
   const [colorCarbonne, setColorCarbonne] = useState<string>('#000000');
   const [colorEmballage, setColorEmballage] = useState<string>('#000000');
+  const [EspeceMenace, setEspeceMenace] = useState<string>("");
 
   console.log(">>>>>>>>");
   console.log(props);
@@ -15,7 +25,7 @@ export const InfoScan = (props: any) => {
   useEffect(() => {
     const trashColorData = getTrashColor(props);
     setEnvironementImpact(getEnvironementImpact(props));
-
+    setEspeceMenace(getEspeceMenace(props));
     if (trashColorData !== infoProductData) {
       if (trashColorData === "nodata" || !trashColorData)
         infoSetProductData("Je suis désolé, mais ma mémoire m'a fait faux bond. Les informations que vous cherchez ne sont pas là.");
@@ -28,13 +38,6 @@ export const InfoScan = (props: any) => {
     setColorEmballage('#90EE90');
   }, [props]);
 
-  const colorMap = {
-    bleu: 'blue',
-    vert: 'green',
-    marrons: 'brown',
-    jaune: 'yellow',
-    gris: 'grey',
-  };
   const backgroundColorRecyclage = colorMap[infoProductData] || 'black';
 
   return (
@@ -91,6 +94,17 @@ export const InfoScan = (props: any) => {
         </View>
       </View>
 
+      <View style={styles.Emballage}>
+        <View style={styles.textContainer}>
+          <Text style={styles.titreEmballage}> {"Espèces menacées"} </Text>
+          <View style={styles.Emballage}>
+            <Text style={[styles.textBouteilleEmballage, { color: colorEmballage }]} >
+              {EspeceMenace}
+            </Text>
+          </View>
+        </View>
+      </View>
+
     </>
   );
 };
@@ -100,6 +114,7 @@ const styles = StyleSheet.create({
     marginBottom: "2%",
     padding: "3%",
     borderRadius: 5,
+    
   },
 
 

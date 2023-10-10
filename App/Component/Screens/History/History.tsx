@@ -27,7 +27,7 @@ export const History = () => {
             setRefreshing(false);
         }, 1000);
     }, []);
-    
+
     // Status bar (heur, date, wifi...), le header (Historique)
     const [showComponentHeader, setShowComponentHeader] = useState(false);
     const [statusBar, setStatusBar] = useState(true);

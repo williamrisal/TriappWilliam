@@ -1,5 +1,5 @@
 import React from 'react';
-import {View, Image, Pressable } from 'react-native';
+import { View, Image, Pressable } from 'react-native';
 import { startClock } from 'react-native-reanimated';
 
 import styles from '../../Style/Footer.style';
@@ -11,22 +11,23 @@ export const Footer = (props: any) => {
 	let logo3 = "https://cdn-icons-png.flaticon.com/512/900/900797.png";
 	var logo = [logo1, logo2];
 
-  	return (
+	return (
 		<View style={styles.sheetContainer}>
 			{logo.map((url, index) => {
 				return (
 					<Pressable
 						key={index}
 						onPress={() => props.setValue(index)}
-						style={({ pressed }) => [{ opacity: pressed ? 0.5 : 1, },]}
+						style={({ pressed }) => [{ opacity: pressed ? 0.5 : 1, }]}
 					>
-					{({ pressed }) => (
-						<View style={props.value == index ? [styles.status, styles.statusOn] : styles.status}>
-							<Image style={styles.imgStatus} source={{uri: url}} />
-						</View>
-					)}
+						{({ pressed }) => (
+							<View style={props.value == index ? [styles.status, styles.statusOn] : styles.status}>
+								<Image style={styles.imgStatus} source={{ uri: url }} />
+							</View>
+						)}
 					</Pressable>
-				);})}
+				);
+			})}
 		</View>
-  	);
+	);
 };

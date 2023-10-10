@@ -9,6 +9,9 @@ export const InfoScan = (props: any) => {
   const [colorCarbonne, setColorCarbonne] = useState<string>('#000000');
   const [colorEmballage, setColorEmballage] = useState<string>('#000000');
 
+  console.log(">>>>>>>>");
+  console.log(props);
+  console.log('<w<<<<<');
   useEffect(() => {
     const trashColorData = getTrashColor(props);
     setEnvironementImpact(getEnvironementImpact(props));
@@ -67,7 +70,7 @@ export const InfoScan = (props: any) => {
             </Text>
           </View>
           <View style={styles.Co2ECarbonne}>
-            <Text style={styles.textCo2ECarbonne}>{ environementImpact + "g de CO2 pour 100g de produit" }</Text>
+            <Text style={styles.textCo2ECarbonne}>{environementImpact + "g de CO2 pour 100g de produit"}</Text>
           </View>
         </View>
       </View>

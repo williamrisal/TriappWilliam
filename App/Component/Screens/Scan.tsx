@@ -35,7 +35,6 @@ const DropDown = (props: any) => {
   const grade = props.productData?.product?.ecoscore_data.grade;
   let imageEcoScore = require("../../Assets/EcoScore/ecoscore-unknown.png");
 
-  console.log("grade", grade)
   switch (grade) {
     case "a":
       imageEcoScore = require("../../Assets/EcoScore/ecoscore-a.png");
@@ -75,15 +74,15 @@ const DropDown = (props: any) => {
               <Text style={styles.productBrand}>
                 {props.productData?.product.brands_tags[0]
                   ? uppercaseFirstLetter(
-                    props.productData?.product.brands_tags[0]
-                  )
+                      props.productData?.product.brands_tags[0]
+                    )
                   : null}
               </Text>
               <Text style={styles.productName}>
                 {props.productData?.product?.product_name_fr
                   ? uppercaseFirstLetter(
-                    props.productData?.product?.product_name_fr
-                  )
+                      props.productData?.product?.product_name_fr
+                    )
                   : "Nom inconnu"}
               </Text>
             </View>
@@ -146,7 +145,6 @@ export const Scan = () => {
     setScanned(true);
     await getProductCode(data)
       .then((response: AxiosResponse) => {
-        console.log("Response Scan: ", response);
         setProductData(response);
         handlePresentModalPress();
       })

@@ -3,13 +3,13 @@ import { View, Text, Image, Pressable } from 'react-native';
 
 import styles from '../../../Style/History.style';
 
-const jaune = (props: any) => {
-	const jauneLinkR = require("../../../Assets/jauneHistorique/jauneRouge.png");
-	const jauneLinkB = require("../../../Assets/jauneHistorique/jauneBleu.png");
-	const jauneLinkJ = require("../../../Assets/jauneHistorique/jauneJaune.png");
-	const jauneLinkC = require("../../../Assets/jauneHistorique/jauneCian.png");
-	const jauneLinkV = require("../../../Assets/jauneHistorique/jauneVert.png");
-	const tabjaune = [jauneLinkR, jauneLinkB, jauneLinkJ, jauneLinkC, jauneLinkV];
+const Smiley = (props: any) => {
+	const smileyLinkR = require("../../../Assets/SmileyHistorique/smileyRouge.png");
+	const smileyLinkB = require("../../../Assets/SmileyHistorique/smileyBleu.png");
+	const smileyLinkJ = require("../../../Assets/SmileyHistorique/smileyJaune.png");
+	const smileyLinkC = require("../../../Assets/SmileyHistorique/smileyCian.png");
+	const smileyLinkV = require("../../../Assets/SmileyHistorique/smileyVert.png");
+	const tabSmiley = [smileyLinkR, smileyLinkB, smileyLinkJ, smileyLinkC, smileyLinkV];
 
 	const res = (props.articleRecycled / props.articleScan) * 100;
 	var smielyChose = 0;
@@ -17,7 +17,7 @@ const jaune = (props: any) => {
 	for (let i = 0, j = 0; (i < 5); i++, j += 20)
 		if (res > j && res <= j + 20 && (smielyChose = i))
 			break;
-	return ( <Image source={tabjaune[smielyChose]} style={styles.jaune} /> );
+	return ( <Image source={tabSmiley[smielyChose]} style={styles.Smiley} /> );
 }
 
 export const HistoryInfo = (props: any) => {
@@ -48,7 +48,7 @@ export const HistoryInfo = (props: any) => {
 							<Text style={styles.text2}> {article} Article </Text>
 					</View>
 					<View style={{ left: "35%", top: 80 }}>
-						<jaune articleScan={article} articleRecycled={articleRecyclable} />
+						<Smiley articleScan={article} articleRecycled={articleRecyclable} />
 					</View>
 			    </>
 				) :

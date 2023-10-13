@@ -7,7 +7,7 @@ import { getProductCode } from '../../Services/getProductCode';
 import { Product } from '../../Models/ProductInfo';
 import { InfoScan } from '../InfoScan';
 
-
+let additionScore = 0;
 const HistoryListMore = (props: any) => {
 	return (
 		<>
@@ -16,7 +16,6 @@ const HistoryListMore = (props: any) => {
 				onRequestClose={() => props.set(false)}
 				animationType="slide"
 				presentationStyle="pageSheet"
-
 			>
 				<Button title="Fermer" onPress={() => props.set(false)} />
 				<InfoScan data={props} />
@@ -26,13 +25,15 @@ const HistoryListMore = (props: any) => {
 }
 
 const HistoryListItem = (props: any) => {
-	//recupere les donner via l'api sur les info des article
 	const [productData, setProductData] = useState<Product>();
 	const [loading, setLoading] = useState(false);
 	const getProductInfos = async (data: string) => {
 		await getProductCode(data)
 			.then((response: AxiosResponse) => {
 				setProductData(response);
+				if (response.product.ecoscore_score != undefined && response.product.ecoscore_score){
+					additionScore = additionScore + Number(response.product.ecoscore_score);
+				}
 				setLoading(true);
 			})
 			.catch(error => {
@@ -40,6 +41,7 @@ const HistoryListItem = (props: any) => {
 				setLoading(true);
 			});
 	};
+	console.log("additionScore => ", additionScore)
 	useEffect(() => {
 		getProductInfos(props.codeBarre);
 	}, []);

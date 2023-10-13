@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { View, Text, Image, Pressable } from 'react-native';
-
+import { View, Text, Image } from 'react-native';
 import styles from '../../../Style/History.style';
 
 const Smiley = (props: any) => {
@@ -25,14 +24,19 @@ export const HistoryInfo = (props: any) => {
 	//recupere le nb d'article et de recyclable
 	const [article, setArticle] = useState(0);
 	const [articleRecyclable, setArticleRecyclable] = useState(0);
+	const [additionScore, setAdditionScore] = useState("");
 	const updateItem = () => {
 		let value = 0;
 
-		if (props.value == null)
-			return;
-		String(props.value)?.split(" ").reverse().map((x, i) => value += 1);
+		if (props.value == null) {
+			value = 0; // default value
+		} else {
+			String(props.value)?.split(" ").reverse().map((x, i) => value += 1);
+		}
 		setArticle(value);
 		setArticleRecyclable(value); //a faire
+		//let test = localStorage.getItem("additionScore");
+		//setAdditionScore(test); 
 	}
 	useEffect(() => {
 		updateItem();
@@ -54,6 +58,8 @@ export const HistoryInfo = (props: any) => {
 				) :
 				<View style={styles.Oscan}>
 					<Text style={styles.OscanText1}>Bienvenue dans l'historique ✌🏼</Text>
+					<Text style={styles.OscanText2}>{additionScore}</Text>
+
 					<Text style={styles.OscanText2}>Vous n'avais pas scanner d'article pour le moment...</Text>
 				</View>
 			}

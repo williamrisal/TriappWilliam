@@ -9,7 +9,6 @@ import { HistoryList } from './HistoryList';
 
 
 export const History = () => {
-
     // recuperer se qui et stocker dans asyncStorage
     const { getItem } = useAsyncStorage('@storage'); // path pour le stockage 
 	const [value, setValue] = useState(null);

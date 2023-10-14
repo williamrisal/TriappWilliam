@@ -67,6 +67,7 @@ export const HistoryInfo = (props: any) => {
 			{ article > 0 ? (
 				<View style={styles.HistoryInfoCase1}>
 					<Text style={styles.text3}> Sur un Total de {articleRecyclable} Recycable </Text>
+					<Text>Score Total: {props.score}</Text>
 				</View>
 			) : <View /> }
 		</View>

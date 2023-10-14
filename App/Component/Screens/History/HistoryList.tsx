@@ -31,7 +31,7 @@ const HistoryListItem = (props: any) => {
 		await getProductCode(data)
 			.then((response: AxiosResponse) => {
 				setProductData(response);
-				if (response.product.ecoscore_score != undefined && response.product.ecoscore_score){
+				if (response.product.ecoscore_score != undefined && response.product.ecoscore_score) {
 					additionScore = additionScore + Number(response.product.ecoscore_score);
 				}
 				setLoading(true);
@@ -42,6 +42,7 @@ const HistoryListItem = (props: any) => {
 			});
 	};
 	console.log("additionScore => ", additionScore)
+	props.setScore(additionScore);
 	useEffect(() => {
 		getProductInfos(props.codeBarre);
 	}, []);
@@ -110,6 +111,12 @@ const HistoryListItem = (props: any) => {
 };
 
 export const HistoryList = (props: any) => {
+	useEffect(() => {
+		return () => {
+			additionScore = 0;
+		};
+	}, []);
+
 	return (
 		<>
 			{props.value == null ?
@@ -122,7 +129,7 @@ export const HistoryList = (props: any) => {
 				:
 				<View style={styles.HistoryList}>
 					{props.value != null && String(props.value).split(" ").reverse().map(
-						(x, i) => <HistoryListItem codeBarre={x} x={i} key={i} />
+						(x, i) => <HistoryListItem codeBarre={x} x={i} key={i} setScore={props.setScore} />
 					)}
 				</View>}
 		</>

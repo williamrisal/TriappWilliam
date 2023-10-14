@@ -9,6 +9,8 @@ import { HistoryList } from './HistoryList';
 
 
 export const History = () => {
+	const [score, setScore] = useState(null);
+
     // recuperer se qui et stocker dans asyncStorage
     const { getItem } = useAsyncStorage('@storage'); // path pour le stockage 
 	const [value, setValue] = useState(null);
@@ -64,8 +66,8 @@ export const History = () => {
                     />
                 }
             >
-                <HistoryInfo value={value} />
-                <HistoryList value={value} />
+                <HistoryInfo value={value} score={score}/>
+                <HistoryList value={value} setScore={setScore}/>
             </ScrollView>
         </View>
     );

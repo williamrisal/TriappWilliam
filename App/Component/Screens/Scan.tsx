@@ -175,7 +175,7 @@ export const Scan = () => {
     bottomSheetModalRef.current?.present();
   }, []);
 
-  const snapPoints = useMemo(() => ["60%"], []);
+  const snapPoints = useMemo(() => ["60%", "90%"], []);
 
   const handleBarCodeScanned = async ({ type, data }: scannedProps) => {
     if (!data.match(/[a-z]/i)) {

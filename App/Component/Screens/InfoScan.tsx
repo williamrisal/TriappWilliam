@@ -21,7 +21,7 @@ export const InfoScan = (props: any) => {
 
   console.log(">>>>>>>>");
   console.log(props);
-  console.log('<w<<<<<');
+  console.log('<<<<<<<<');
   useEffect(() => {
     const trashColorData = getTrashColor(props);
     setEnvironementImpact(getEnvironementImpact(props));
@@ -99,7 +99,7 @@ export const InfoScan = (props: any) => {
           <Text style={styles.titreEmballage}> {"Espèces menacées"} </Text>
           <View style={styles.Emballage}>
             <Text style={[styles.textBouteilleEmballage, { color: colorEmballage }]} >
-              {EspeceMenace}
+              {EspeceMenace ? "OUI" : "NON"}
             </Text>
           </View>
         </View>

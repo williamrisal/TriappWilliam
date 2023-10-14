@@ -8,6 +8,7 @@ import { Product } from '../../Models/ProductInfo';
 import { InfoScan } from '../InfoScan';
 
 let additionScore = 0;
+let NumberItemForScore = 0;
 const HistoryListMore = (props: any) => {
 	return (
 		<>
@@ -33,6 +34,7 @@ const HistoryListItem = (props: any) => {
 				setProductData(response);
 				if (response.product.ecoscore_score != undefined && response.product.ecoscore_score) {
 					additionScore = additionScore + Number(response.product.ecoscore_score);
+					NumberItemForScore++;
 				}
 				setLoading(true);
 			})
@@ -42,7 +44,6 @@ const HistoryListItem = (props: any) => {
 			});
 	};
 	console.log("additionScore => ", additionScore)
-	props.setScore(additionScore);
 	useEffect(() => {
 		getProductInfos(props.codeBarre);
 	}, []);

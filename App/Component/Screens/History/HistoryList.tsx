@@ -43,7 +43,7 @@ const HistoryListItem = (props: any) => {
 				setLoading(true);
 			});
 	};
-	console.log("additionScore => ", additionScore)
+	props.setScore(additionScore);
 	useEffect(() => {
 		getProductInfos(props.codeBarre);
 	}, []);

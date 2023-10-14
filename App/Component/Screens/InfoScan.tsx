@@ -3,6 +3,7 @@ import { Image, View, Text, StyleSheet } from "react-native";
 import { getTrashColor } from "../Services/getTrashColor";
 import { getEnvironementImpact } from "../Services/getEnvironementImpact";
 import { getEspeceMenace } from "../Services/getEspeceMenace";
+import { getPackagingText } from "../Services/getPackagingText";
 
   const colorMap = {
     bleu: 'blue',
@@ -18,6 +19,7 @@ export const InfoScan = (props: any) => {
   const [colorCarbonne, setColorCarbonne] = useState<string>('#000000');
   const [colorEmballage, setColorEmballage] = useState<string>('#000000');
   const [EspeceMenace, setEspeceMenace] = useState<string>("");
+  const [PackagingText, setPackagingText] = useState<string>("");
 
   console.log(">>>>>>>>");
   console.log(props);
@@ -26,6 +28,8 @@ export const InfoScan = (props: any) => {
     const trashColorData = getTrashColor(props);
     setEnvironementImpact(getEnvironementImpact(props));
     setEspeceMenace(getEspeceMenace(props));
+    //setPackagingText(props.data.product.packaging_text_fr);
+    setPackagingText(getPackagingText(props))
     if (trashColorData !== infoProductData) {
       if (trashColorData === "nodata" || !trashColorData)
         infoSetProductData("Je suis désolé, mais ma mémoire m'a fait faux bond. Les informations que vous cherchez ne sont pas là.");
@@ -49,17 +53,18 @@ export const InfoScan = (props: any) => {
           <Text style={[styles.textRecyclage, { color: infoProductData === "jaune" ? "black" : "white" }]}>
             {infoProductData === "black"
               ? "Ce produit n'est pas recyclable"
-              : "Ce produit est recyclable"}
+              : "Ce produit est recyclable "}
           </Text>
           <Text style={{ color: infoProductData === "jaune" ? "black" : "white" }}>
             {infoProductData === "black"
               ? "Jeter dans la poubelle ordinaire"
-              : "Jeter dans la poubelle " + infoProductData}
+              :  "Jeter dans la poubelle " + infoProductData}
           </Text>
         </View>
       </View>
-
-
+      <View>
+        <Text>{PackagingText}</Text>
+      </View>
       <View style={styles.Carbonne}>
         <View style={styles.textContainer}>
           <Text style={styles.titreECarbonne}> {"Empreinte Carbone"} </Text>

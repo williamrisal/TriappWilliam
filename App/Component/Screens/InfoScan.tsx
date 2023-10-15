@@ -5,60 +5,76 @@ import { getEnvironementImpact } from "../Services/getEnvironementImpact";
 import { getEspeceMenace } from "../Services/getEspeceMenace";
 import { getPackagingText } from "../Services/getPackagingText";
 
-  const colorMap = {
-    bleu: 'blue',
-    vert: 'green',
-    marrons: 'brown',
-    jaune: 'yellow',
-    gris: 'grey',
-  };
+const colorMap = {
+  bleu: "blue",
+  vert: "green",
+  marrons: "brown",
+  jaune: "yellow",
+  gris: "grey",
+};
 
 export const InfoScan = (props: any) => {
   const [infoProductData, infoSetProductData] = useState();
   const [environementImpact, setEnvironementImpact] = useState();
-  const [colorCarbonne, setColorCarbonne] = useState<string>('#000000');
-  const [colorEmballage, setColorEmballage] = useState<string>('#000000');
+  const [colorCarbonne, setColorCarbonne] = useState<string>("#000000");
+  const [colorEmballage, setColorEmballage] = useState<string>("#000000");
   const [EspeceMenace, setEspeceMenace] = useState<string>("");
   const [PackagingText, setPackagingText] = useState<string>("");
-
-  console.log(">>>>>>>>");
-  console.log(props);
-  console.log('<<<<<<<<');
   useEffect(() => {
-    const trashColorData = getTrashColor(props);
-    setEnvironementImpact(getEnvironementImpact(props));
-    setEspeceMenace(getEspeceMenace(props));
-    //setPackagingText(props.data.product.packaging_text_fr);
-    setPackagingText(getPackagingText(props))
-    if (trashColorData !== infoProductData) {
-      if (trashColorData === "nodata" || !trashColorData)
-        infoSetProductData("Je suis désolé, mais ma mémoire m'a fait faux bond. Les informations que vous cherchez ne sont pas là.");
-      else
-        infoSetProductData(trashColorData[1]);
-    }
+    const fetchData = async () => {
+      const trashColorData = await getTrashColor(props);
 
-    setColorCarbonne(environementImpact < 300 ? '#90EE90' : environementImpact <= 600 ? '#FFA500' : '#FF6961');
-    //faire la couleur en focntion de..
-    setColorEmballage('#90EE90');
+      if (trashColorData === "nodata" || !trashColorData) {
+        infoSetProductData(
+          "Je suis désolé, mais ma mémoire m'a fait faux bond. Les informations que vous cherchez ne sont pas là."
+        );
+      } else {
+        infoSetProductData(trashColorData[1]);
+      }
+
+      setEnvironementImpact(getEnvironementImpact(props));
+      setEspeceMenace(getEspeceMenace(props));
+      setPackagingText(getPackagingText(props));
+    };
+    setColorCarbonne(
+      environementImpact < 300
+        ? "#90EE90"
+        : environementImpact <= 600
+        ? "#FFA500"
+        : "#FF6961"
+    );
+    setColorEmballage("#90EE90");
+    fetchData();
   }, [props]);
 
-  const backgroundColorRecyclage = colorMap[infoProductData] || 'black';
-
+  const backgroundColorRecyclage = colorMap[infoProductData] || "black";
   return (
     <>
-
-      <View style={[styles.textContainer, styles.recyclage, { backgroundColor: backgroundColorRecyclage }]}>
+      <View
+        style={[
+          styles.textContainer,
+          styles.recyclage,
+          { backgroundColor: backgroundColorRecyclage },
+        ]}
+      >
         <Image source={require("../../Assets/recycle.png")} />
         <View style={styles.recyclageText}>
-          <Text style={[styles.textRecyclage, { color: infoProductData === "jaune" ? "black" : "white" }]}>
+          <Text
+            style={[
+              styles.textRecyclage,
+              { color: infoProductData === "jaune" ? "black" : "white" },
+            ]}
+          >
             {infoProductData === "black"
               ? "Ce produit n'est pas recyclable"
               : "Ce produit est recyclable "}
           </Text>
-          <Text style={{ color: infoProductData === "jaune" ? "black" : "white" }}>
+          <Text
+            style={{ color: infoProductData === "jaune" ? "black" : "white" }}
+          >
             {infoProductData === "black"
               ? "Jeter dans la poubelle ordinaire"
-              :  "Jeter dans la poubelle " + infoProductData}
+              : "Jeter dans la poubelle " + infoProductData}
           </Text>
         </View>
       </View>
@@ -73,16 +89,19 @@ export const InfoScan = (props: any) => {
               style={[styles.imageECarbonne, { tintColor: colorCarbonne }]}
               source={require("../../Assets/Car/car.png")}
             />
-            <Text style={[styles.textCarECarbonne, { color: colorCarbonne }]} >
-              {"Équivaut à parcourir " + (767 / 191.75).toFixed(2) + " km dans une voiture à essence"}
+            <Text style={[styles.textCarECarbonne, { color: colorCarbonne }]}>
+              {"Équivaut à parcourir " +
+                (767 / 191.75).toFixed(2) +
+                " km dans une voiture à essence"}
             </Text>
           </View>
           <View style={styles.Co2ECarbonne}>
-            <Text style={styles.textCo2ECarbonne}>{environementImpact + "g de CO2 pour 100g de produit"}</Text>
+            <Text style={styles.textCo2ECarbonne}>
+              {environementImpact + "g de CO2 pour 100g de produit"}
+            </Text>
           </View>
         </View>
       </View>
-
 
       <View style={styles.Emballage}>
         <View style={styles.textContainer}>
@@ -92,7 +111,9 @@ export const InfoScan = (props: any) => {
               style={[styles.imageEmballage, { tintColor: colorEmballage }]}
               source={require("../../Assets/Emballage/emballage.png")}
             />
-            <Text style={[styles.textBouteilleEmballage, { color: colorEmballage }]} >
+            <Text
+              style={[styles.textBouteilleEmballage, { color: colorEmballage }]}
+            >
               {"Emballage a " + "faible" + " impact"}
             </Text>
           </View>
@@ -103,13 +124,14 @@ export const InfoScan = (props: any) => {
         <View style={styles.textContainer}>
           <Text style={styles.titreEmballage}> {"Espèces menacées"} </Text>
           <View style={styles.Emballage}>
-            <Text style={[styles.textBouteilleEmballage, { color: colorEmballage }]} >
+            <Text
+              style={[styles.textBouteilleEmballage, { color: colorEmballage }]}
+            >
               {EspeceMenace ? "OUI" : "NON"}
             </Text>
           </View>
         </View>
       </View>
-
     </>
   );
 };
@@ -119,9 +141,7 @@ const styles = StyleSheet.create({
     marginBottom: "2%",
     padding: "3%",
     borderRadius: 5,
-    
   },
-
 
   recyclage: {
     flexDirection: "row",
@@ -140,18 +160,17 @@ const styles = StyleSheet.create({
     marginLeft: 10,
   },
 
-
   Carbonne: {
     height: "40%",
   },
   titreECarbonne: {
     fontSize: 20,
-    fontWeight: 'bold',
+    fontWeight: "bold",
   },
   eCarbonne: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'space-between',
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "space-between",
   },
   imageECarbonne: {
     width: 60,
@@ -160,25 +179,24 @@ const styles = StyleSheet.create({
   },
   textCarECarbonne: {
     width: "80%",
-    fontWeight: 'bold',
+    fontWeight: "bold",
   },
   Co2ECarbonne: {
-    alignItems: 'flex-end',
+    alignItems: "flex-end",
   },
   textCo2ECarbonne: {
     width: "80%",
-    fontWeight: 'bold',
+    fontWeight: "bold",
   },
 
-
   Emballage: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'space-between',
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "space-between",
   },
   titreEmballage: {
     fontSize: 20,
-    fontWeight: 'bold',
+    fontWeight: "bold",
   },
   imageEmballage: {
     width: 60,
@@ -189,5 +207,4 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
     fontSize: 20,
   },
-
 });

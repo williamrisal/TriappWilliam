@@ -122,14 +122,7 @@ export const InfoScan = (props: any) => {
 
       <View style={styles.Emballage}>
         <View style={styles.textContainer}>
-          <Text style={styles.titreEmballage}> {"Espèces menacées"} </Text>
-          <View style={styles.Emballage}>
-            <Text
-              style={[styles.textBouteilleEmballage, { color: colorEmballage }]}
-            >
-              {EspeceMenace ? "OUI" : "NON"}
-            </Text>
-          </View>
+          <Text style={[styles.textBouteilleEmballage, { color: "#FF6961" }]}> {EspeceMenace ? "Ce produit menace la survie de certaines espèces." : null} </Text>
         </View>
       </View>
     </>
@@ -204,7 +197,7 @@ const styles = StyleSheet.create({
     marginRight: 10,
   },
   textBouteilleEmballage: {
-    fontWeight: "bold",
     fontSize: 20,
+    fontWeight: "bold",
   },
 });

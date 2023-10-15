@@ -12,8 +12,8 @@ export default StyleSheet.create({
 	},
 	horizontalContainer: {
 		flexDirection: 'row',
-		alignItems: 'center', // Aligne les éléments verticalement au centre
-		justifyContent: 'center', // Aligne les éléments horizontalement au centre
+		alignItems: 'center', 
+		justifyContent: 'center',  
 	  },
 	sheetHeader: {
 		height: '100%',
@@ -75,6 +75,10 @@ export default StyleSheet.create({
 		height: 35,
 		resizeMode: 'contain',
 		top: 10,
+	},
+
+	ScrollViewS: {
+		height: 1000,
 	},
 
 });

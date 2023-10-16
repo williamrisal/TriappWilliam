@@ -4,6 +4,7 @@ import { getTrashColor } from "../Services/getTrashColor";
 import { getEnvironementImpact } from "../Services/getEnvironementImpact";
 import { getEspeceMenace } from "../Services/getEspeceMenace";
 import { getPackagingText } from "../Services/getPackagingText";
+import { set } from "react-native-reanimated";
 
 const colorMap = {
   bleu: "blue",
@@ -18,6 +19,7 @@ export const InfoScan = (props: any) => {
   const [environementImpact, setEnvironementImpact] = useState();
   const [colorCarbonne, setColorCarbonne] = useState<string>("#000000");
   const [colorEmballage, setColorEmballage] = useState<string>("#000000");
+  const [colorEspece, setColorEspece] = useState<string>("#000000");
   const [EspeceMenace, setEspeceMenace] = useState<string>("");
   const [PackagingText, setPackagingText] = useState<string>("");
   useEffect(() => {
@@ -43,6 +45,7 @@ export const InfoScan = (props: any) => {
         ? "#FFA500"
         : "#FF6961"
     );
+    setColorEspece(EspeceMenace ? "#FF6961" : "#90EE90");
     setColorEmballage("#90EE90");
     fetchData();
   }, [props]);
@@ -122,7 +125,18 @@ export const InfoScan = (props: any) => {
 
       <View style={styles.Emballage}>
         <View style={styles.textContainer}>
-          <Text style={[styles.textBouteilleEmballage, { color: "#FF6961" }]}> {EspeceMenace ? "Ce produit menace la survie de certaines espèces." : null} </Text>
+          <Text style={styles.titreEmballage}> {"Espèces menacées"} </Text>
+          <View style={styles.Emballage}>
+          <Image
+              style={[styles.imageECarbonne, { tintColor: colorCarbonne }]}
+              source={require("../../Assets/palm-oil.png")}
+            />
+            <Text
+              style={[styles.textBouteilleEmballage, { color: colorEspece }]}
+            >
+              {EspeceMenace ? "Ce produit menace la survie de certaines espèces." : "Aucun espece n'est menacé par ce produit"}
+            </Text>
+          </View>
         </View>
       </View>
     </>
@@ -197,7 +211,12 @@ const styles = StyleSheet.create({
     marginRight: 10,
   },
   textBouteilleEmballage: {
-    fontSize: 20,
     fontWeight: "bold",
+    fontSize: 20,
+  },
+  imageEspece: {
+    width: 60,
+    height: 60,
+    marginRight: 10,
   },
 });

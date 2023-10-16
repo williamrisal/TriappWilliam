@@ -45,6 +45,7 @@ export const InfoScan = (props: any) => {
         ? "#FFA500"
         : "#FF6961"
     );
+    console.log("test" + EspeceMenace)
     setColorEspece(EspeceMenace ? "#FF6961" : "#90EE90");
     setColorEmballage("#90EE90");
     fetchData();
@@ -128,7 +129,7 @@ export const InfoScan = (props: any) => {
           <Text style={styles.titreEmballage}> {"Espèces menacées"} </Text>
           <View style={styles.Emballage}>
           <Image
-              style={[styles.imageECarbonne, { tintColor: colorCarbonne }]}
+              style={[styles.imageECarbonne, { tintColor: colorEspece }]}
               source={require("../../Assets/palm-oil.png")}
             />
             <Text

@@ -29,7 +29,7 @@ export const HistoryInfo = (props: any) => {
 		let value = 0;
 
 		if (props.value == null) {
-			value = 0; // default value
+			value = 0; 
 		} else {
 			String(props.value)?.split(" ").reverse().map((x, i) => value += 1);
 		}

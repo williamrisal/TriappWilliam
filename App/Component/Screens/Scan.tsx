@@ -5,6 +5,7 @@ import React, {
   useMemo,
   useCallback,
 } from "react";
+import CircularProgress from 'react-native-circular-progress-indicator';
 import { Text, View, StyleSheet, Image, Button } from "react-native";
 import { useAsyncStorage } from "@react-native-async-storage/async-storage";
 import { AxiosResponse } from "axios";
@@ -34,7 +35,7 @@ const DropDown = (props: any) => {
   const label = getlabel(props);
   const grade = props.productData?.product?.ecoscore_data.grade;
   let imageEcoScore = require("../../Assets/EcoScore/ecoscore-unknown.png");
-
+  console.log(props.productData?.product?.score)
   switch (grade) {
     case "a":
       imageEcoScore = require("../../Assets/EcoScore/ecoscore-a.png");
@@ -87,6 +88,21 @@ const DropDown = (props: any) => {
               </Text>
             </View>
             <View style={styles.horizontalContainer}>
+            <View style={{ width: "10%", height: "90%" , marginLeft: -70, marginRight: 40}}>
+                <CircularProgress
+                  value={props.productData.product.ecoscore_score}
+                  activeStrokeWidth={8} // Ajustez la largeur de la progression
+                  radius={23} // Ajustez la taille du cercle de progression
+                  progressValueColor={"black"}
+                  activeStrokeColor={props.productData.product.ecoscore_score < 25
+                  ? "#FF6961"
+                  : props.productData.product.ecoscore_score < 50
+                  ? "#FFA500" 
+                  : "#90EE90"
+                  }
+                  duration={1400}
+                  />
+              </View>
               <Image style={styles.image_labels} source={imageEcoScore} />
 
               {label.map((item, index) => {

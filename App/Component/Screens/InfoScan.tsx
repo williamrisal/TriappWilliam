@@ -19,7 +19,6 @@ export const InfoScan = (props: any) => {
   const [environementImpact, setEnvironementImpact] = useState();
   const [colorCarbonne, setColorCarbonne] = useState<string>("#000000");
   const [colorEmballage, setColorEmballage] = useState<string>("#000000");
-  const [colorEspece, setColorEspece] = useState<string>("#000000");
   const [EspeceMenace, setEspeceMenace] = useState<string>("");
   const [PackagingText, setPackagingText] = useState<string>("");
   useEffect(() => {
@@ -45,8 +44,6 @@ export const InfoScan = (props: any) => {
         ? "#FFA500"
         : "#FF6961"
     );
-    console.log("test" + EspeceMenace)
-    setColorEspece(EspeceMenace ? "#FF6961" : "#90EE90");
     setColorEmballage("#90EE90");
     fetchData();
   }, [props]);
@@ -106,7 +103,6 @@ export const InfoScan = (props: any) => {
           </View>
         </View>
       </View>
-
       <View style={styles.Emballage}>
         <View style={styles.textContainer}>
           <Text style={styles.titreEmballage}> {"Emballage"} </Text>
@@ -129,11 +125,11 @@ export const InfoScan = (props: any) => {
           <Text style={styles.titreEmballage}> {"Espèces menacées"} </Text>
           <View style={styles.Emballage}>
           <Image
-              style={[styles.imageECarbonne, { tintColor: colorEspece }]}
+              style={[styles.imageECarbonne, { tintColor: EspeceMenace ? "#FF6961" : "#90EE90" }]}
               source={require("../../Assets/palm-oil.png")}
             />
             <Text
-              style={[styles.textBouteilleEmballage, { color: colorEspece }]}
+              style={[styles.textBouteilleEmballage, { color: EspeceMenace ? "#FF6961" : "#90EE90" }]}
             >
               {EspeceMenace ? "Ce produit menace la survie de certaines espèces." : "Aucun espece n'est menacé par ce produit"}
             </Text>
@@ -170,6 +166,8 @@ const styles = StyleSheet.create({
 
   Carbonne: {
     height: "40%",
+    marginBottom: "-13%",
+
   },
   titreECarbonne: {
     fontSize: 20,
@@ -179,6 +177,7 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     alignItems: "center",
     justifyContent: "space-between",
+    
   },
   imageECarbonne: {
     width: 60,
@@ -201,6 +200,7 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     alignItems: "center",
     justifyContent: "space-between",
+    
   },
   titreEmballage: {
     fontSize: 20,

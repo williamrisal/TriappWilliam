@@ -1,10 +1,16 @@
 import React, { useState, useEffect } from "react";
-import { Image, View, Text, StyleSheet } from "react-native";
+import {
+  Image,
+  View,
+  Text,
+  StyleSheet,
+  TouchableOpacity,
+  LayoutAnimation,
+} from "react-native";
 import { getTrashColor } from "../Services/getTrashColor";
 import { getEnvironementImpact } from "../Services/getEnvironementImpact";
 import { getEspeceMenace } from "../Services/getEspeceMenace";
 import { getPackagingText } from "../Services/getPackagingText";
-import { set } from "react-native-reanimated";
 
 const colorMap = {
   bleu: "blue",
@@ -21,6 +27,8 @@ export const InfoScan = (props: any) => {
   const [colorEmballage, setColorEmballage] = useState<string>("#000000");
   const [EspeceMenace, setEspeceMenace] = useState<string>("");
   const [PackagingText, setPackagingText] = useState<string>("");
+  const [isMessageVisible, setMessageVisible] = useState(false);
+
   useEffect(() => {
     const fetchData = async () => {
       const trashColorData = await getTrashColor(props);
@@ -34,6 +42,7 @@ export const InfoScan = (props: any) => {
       }
 
       setEnvironementImpact(getEnvironementImpact(props));
+      console.log(getEnvironementImpact(props));
       setEspeceMenace(getEspeceMenace(props));
       setPackagingText(getPackagingText(props));
     };
@@ -47,6 +56,10 @@ export const InfoScan = (props: any) => {
     setColorEmballage("#90EE90");
     fetchData();
   }, [props]);
+  const toggleMessage = () => {
+    LayoutAnimation.configureNext(LayoutAnimation.Presets.easeInEaseOut);
+    setMessageVisible(!isMessageVisible);
+  };
 
   const backgroundColorRecyclage = colorMap[infoProductData] || "black";
   return (
@@ -59,30 +72,44 @@ export const InfoScan = (props: any) => {
         ]}
       >
         <Image source={require("../../Assets/recycle.png")} />
-        <View style={styles.recyclageText}>
-          <Text
-            style={[
-              styles.textRecyclage,
-              { color: infoProductData === "jaune" ? "black" : "white" },
-            ]}
-          >
-            {infoProductData === "black"
-              ? "Ce produit n'est pas recyclable"
-              : "Ce produit est recyclable "}
-          </Text>
-          <Text
-            style={{ color: infoProductData === "jaune" ? "black" : "white" }}
-          >
-            {infoProductData === "black"
-              ? "Jeter dans la poubelle ordinaire"
-              : "Jeter dans la poubelle " + infoProductData}
-          </Text>
-        </View>
+
+        <TouchableOpacity onPress={toggleMessage}>
+          <View style={styles.recyclageText}>
+            <Text
+              style={[
+                styles.textRecyclage,
+                { color: infoProductData === "jaune" ? "black" : "white" },
+              ]}
+            >
+              {infoProductData === "black"
+                ? "Ce produit n'est pas recyclable"
+                : "Ce produit est recyclable "}
+            </Text>
+            <Text
+              style={{ color: infoProductData === "jaune" ? "black" : "white" }}
+            >
+              {infoProductData === "black"
+                ? "Jeter dans la poubelle ordinaire"
+                : "Jeter dans la poubelle " + infoProductData}
+            </Text>
+            <Text style={{fontWeight: "bold", fontSize: "10px"}}> {"(Cliquez pour plus d'infos)"} </Text>
+
+          </View>
+        </TouchableOpacity>
       </View>
-      <View>
+
+      {isMessageVisible && (
+        <View
+          style={{
+            backgroundColor: "lightgray",
+            padding: 10,
+            borderRadius: 10,
+          }}
+        >
         <Text>{PackagingText}</Text>
-      </View>
-      <View style={styles.Carbonne}>
+        </View>
+      )}
+      <View>
         <View style={styles.textContainer}>
           <Text style={styles.titreECarbonne}> {"Empreinte Carbone"} </Text>
           <View style={styles.eCarbonne}>
@@ -92,8 +119,8 @@ export const InfoScan = (props: any) => {
             />
             <Text style={[styles.textCarECarbonne, { color: colorCarbonne }]}>
               {"Équivaut à parcourir " +
-                (767 / 191.75).toFixed(2) +
-                " km dans une voiture à essence"}
+                (environementImpact / 191.75).toFixed(2) +
+                " km dans \n une voiture à essence"}
             </Text>
           </View>
           <View style={styles.Co2ECarbonne}>
@@ -124,14 +151,22 @@ export const InfoScan = (props: any) => {
         <View style={styles.textContainer}>
           <Text style={styles.titreEmballage}> {"Espèces menacées"} </Text>
           <View style={styles.Emballage}>
-          <Image
-              style={[styles.imageECarbonne, { tintColor: EspeceMenace ? "#FF6961" : "#90EE90" }]}
+            <Image
+              style={[
+                styles.imageECarbonne,
+                { tintColor: EspeceMenace ? "#FF6961" : "#90EE90" },
+              ]}
               source={require("../../Assets/palm-oil.png")}
             />
             <Text
-              style={[styles.textBouteilleEmballage, { color: EspeceMenace ? "#FF6961" : "#90EE90" }]}
+              style={[
+                styles.textBouteilleEmballage,
+                { color: EspeceMenace ? "#FF6961" : "#90EE90" },
+              ]}
             >
-              {EspeceMenace ? "Ce produit menace la survie de certaines espèces." : "Aucun espece n'est menacé par ce produit"}
+              {EspeceMenace
+                ? "Ce produit menace la survie de\n certaines espèces."
+                : "Aucun espece n'est menacé par ce produit"}
             </Text>
           </View>
         </View>
@@ -164,11 +199,6 @@ const styles = StyleSheet.create({
     marginLeft: 10,
   },
 
-  Carbonne: {
-    height: "40%",
-    marginBottom: "-13%",
-
-  },
   titreECarbonne: {
     fontSize: 20,
     fontWeight: "bold",
@@ -185,8 +215,8 @@ const styles = StyleSheet.create({
     marginRight: 10,
   },
   textCarECarbonne: {
-    width: "80%",
     fontWeight: "bold",
+    fontSize: 20,
   },
   Co2ECarbonne: {
     alignItems: "flex-end",

@@ -23,8 +23,6 @@ export const HistoryInfo = (props: any) => {
 	
 	//recupere le nb d'article et de recyclable
 	const [article, setArticle] = useState(0);
-	const [articleRecyclable, setArticleRecyclable] = useState(0);
-	const [additionScore, setAdditionScore] = useState("");
 	const updateItem = () => {
 		let value = 0;
 
@@ -34,7 +32,8 @@ export const HistoryInfo = (props: any) => {
 			String(props.value)?.split(" ").reverse().map((x, i) => value += 1);
 		}
 		setArticle(value);
-		setArticleRecyclable(value); //a faire
+
+
 	}
 	useEffect(() => {
 		updateItem();
@@ -50,21 +49,19 @@ export const HistoryInfo = (props: any) => {
 							<Text style={styles.text2}> {article} Articles </Text>
 					</View>
 					<View style={{ left: "35%", top: 80 }}>
-						<Smiley articleScan={article} articleRecycled={articleRecyclable} />
+						<Smiley articleScan={article} articleRecycled={props.NbRecyclableItem} />
 					</View>
 			    </>
 				) :
 				<View style={styles.Oscan}>
 					<Text style={styles.OscanText1}>Bienvenue dans l'historique ✌🏼</Text>
-					<Text style={styles.OscanText2}>{additionScore}</Text>
-
 					<Text style={styles.OscanText2}>Vous n'avais pas scanner d'article pour le moment...</Text>
 				</View>
 			}
 			</View>
 			{ article > 0 ? (
 				<View style={styles.HistoryInfoCase1}>
-					<Text style={styles.text3}> Sur un Total de {articleRecyclable} Recycable </Text>
+					<Text style={styles.text3}> Sur un Total de {props.NbRecyclableItem} Recycable </Text>
 					<Text style={styles.text3}> Score Total: {props.score}</Text>
 				</View>
 			) : <View /> }

@@ -165,11 +165,12 @@ export const Scan = () => {
         handlePresentModalPress();
       })
       .catch((error) => {
-        setProductData("undefined");
+        setScanned(false);
+
+        //setProductData("undefined");
       });
   };
 
-  // ajouter le nouveau code barre a la liste de tout les code barre scanne
   const { getItem, setItem } = useAsyncStorage("@storage");
   const setStorageHistory = async (data: any) => {
     const listCodeBarre = await getItem();
@@ -196,6 +197,11 @@ export const Scan = () => {
   const handleBarCodeScanned = async ({ type, data }: scannedProps) => {
     if (!data.match(/[a-z]/i)) {
       getProductInfos(data);
+      console.log(data)
+      if (productData === "undefined") {
+        console.log("Product not found")
+        return undefined;
+      }
       setScanned(true);
       setStorageHistory(data);
     } else {

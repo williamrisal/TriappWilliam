@@ -23,6 +23,7 @@ export const HistoryInfo = (props: any) => {
 	
 	//recupere le nb d'article et de recyclable
 	const [article, setArticle] = useState(0);
+
 	const updateItem = () => {
 		let value = 0;
 
@@ -32,8 +33,6 @@ export const HistoryInfo = (props: any) => {
 			String(props.value)?.split(" ").reverse().map((x, i) => value += 1);
 		}
 		setArticle(value);
-
-
 	}
 	useEffect(() => {
 		updateItem();

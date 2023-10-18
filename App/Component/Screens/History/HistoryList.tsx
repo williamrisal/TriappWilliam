@@ -8,6 +8,7 @@ import { Product } from '../../Models/ProductInfo';
 import { InfoScan } from '../InfoScan';
 
 let additionScore = 0;
+let scoreRecyclable = 0;
 let NumberItemForScore = 0;
 const HistoryListMore = (props: any) => {
 	return (
@@ -25,7 +26,6 @@ const HistoryListMore = (props: any) => {
 	);
 }
 
-let scoreRecyclable = 0;
 const HistoryListItem = (props: any) => {
 	const [productData, setProductData] = useState<Product>();
 	const [loading, setLoading] = useState(false);
@@ -122,6 +122,7 @@ export const HistoryList = (props: any) => {
 	useEffect(() => {
 		return () => {
 			additionScore = 0;
+			scoreRecyclable = 0;
 		};
 	}, []);
 	return (

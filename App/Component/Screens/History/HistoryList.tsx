@@ -8,6 +8,7 @@ import { Product } from '../../Models/ProductInfo';
 import { InfoScan } from '../InfoScan';
 
 let additionScore = 0;
+let scoreRecyclable = 0;
 let NumberItemForScore = 0;
 const HistoryListMore = (props: any) => {
 	return (
@@ -32,6 +33,8 @@ const HistoryListItem = (props: any) => {
 		await getProductCode(data)
 			.then((response: AxiosResponse) => {
 				setProductData(response);
+				scoreRecyclable += response.product.ecoscore_data?.adjustments?.packaging?.non_recyclable_and_non_biodegradable_materials == 1 ? 0 : 1;
+				
 				if (response.product.ecoscore_score != undefined && response.product.ecoscore_score) {
 					additionScore = additionScore + Number(response.product.ecoscore_score);
 					NumberItemForScore++;
@@ -42,10 +45,14 @@ const HistoryListItem = (props: any) => {
 				console.log("error => ", error);
 				setLoading(true);
 			});
+
 	};
 	props.setScore(additionScore);
+	props.setNbRecyclableItem(scoreRecyclable);
+
 	useEffect(() => {
 		getProductInfos(props.codeBarre);
+
 	}, []);
 
 	const getNameCompagny = (data: any) => {
@@ -115,9 +122,9 @@ export const HistoryList = (props: any) => {
 	useEffect(() => {
 		return () => {
 			additionScore = 0;
+			scoreRecyclable = 0;
 		};
 	}, []);
-
 	return (
 		<>
 			{props.value == null ?
@@ -130,7 +137,7 @@ export const HistoryList = (props: any) => {
 				:
 				<View style={styles.HistoryList}>
 					{props.value != null && String(props.value).split(" ").reverse().map(
-						(x, i) => <HistoryListItem codeBarre={x} x={i} key={i} setScore={props.setScore} />
+						(x, i) => <HistoryListItem codeBarre={x} x={i} key={i} setScore={props.setScore} setNbRecyclableItem={props.setNbRecyclableItem} />
 					)}
 				</View>}
 		</>

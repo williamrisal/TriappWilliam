@@ -6,6 +6,7 @@ import styles from '../../../Style/History.style';
 import { getProductCode } from '../../Services/getProductCode';
 import { Product } from '../../Models/ProductInfo';
 import { InfoScan } from '../InfoScan';
+import { Infos } from '../Scan';
 
 let additionScore = 0;
 let scoreRecyclable = 0;
@@ -20,6 +21,9 @@ const HistoryListMore = (props: any) => {
 				presentationStyle="pageSheet"
 			>
 				<Button title="Fermer" onPress={() => props.set(false)} />
+				<Infos
+              		productData={props.productData}
+            	/>
 				<InfoScan data={props} />
 			</Modal>
 		</>

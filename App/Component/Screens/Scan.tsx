@@ -28,7 +28,7 @@ interface scannedProps {
   data: string;
 }
 
-const DropDown = (props: any) => {
+export const Infos = (props: any) => {
   let errorImg =
     "https://www.batirama.com/scaled/983/755/1/2017/08/31/125459/images/article/15082-_00erreur.jpg";
 
@@ -52,6 +52,89 @@ const DropDown = (props: any) => {
     default:
       break;
   }
+
+  return (
+    <View style={styles.sheetHeader}>
+      <View style={styles.sheetHeaderInfo}>
+        <Image
+          style={styles.image}
+          source={{
+            uri:
+              props.productData?.product?.image_url == null
+                ? errorImg
+                : props.productData?.product?.image_url,
+          }}
+        />
+        <View style={styles.productContainer}>
+          <View style={styles.productInfosContainer}>
+            <Text style={styles.productBrand}>
+              {props.productData?.product.brands_tags[0]
+                ? uppercaseFirstLetter(
+                  props.productData?.product.brands_tags[0]
+                )
+                : null}
+            </Text>
+            <Text style={styles.productName}>
+              {props.productData?.product?.product_name_fr
+                ? uppercaseFirstLetter(
+                  props.productData?.product?.product_name_fr
+                )
+                : "Nom inconnu"}
+            </Text>
+          </View>
+          <View style={styles.horizontalContainer}>
+            <View style={{ width: "10%", height: "90%", marginLeft: -70, marginRight: 40 }}>
+              <CircularProgress
+                value={props.productData.product.ecoscore_score}
+                activeStrokeWidth={8} // Ajustez la largeur de la progression
+                radius={23} // Ajustez la taille du cercle de progression
+                progressValueColor={"black"}
+                activeStrokeColor={props.productData.product.ecoscore_score < 25
+                  ? "#FF6961"
+                  : props.productData.product.ecoscore_score < 50
+                    ? "#FFA500"
+                    : "#90EE90"
+                }
+                duration={1400}
+              />
+            </View>
+            <Image style={styles.image_labels} source={imageEcoScore} />
+
+            {label.map((item, index) => {
+              if (item === "fr:triman") {
+                return (
+                  <Image
+                    key={index}
+                    style={styles.image_labels}
+                    source={require("../../Assets/labels/logo_triman.png")}
+                  />
+                );
+              } else if (item === "en:green-dot") {
+                return (
+                  <Image
+                    key={index}
+                    style={styles.image_labels}
+                    source={require("../../Assets/labels/Green_dot.png")}
+                  />
+                );
+              } else {
+                return null;
+              }
+            })}
+          </View>
+        </View>
+      </View>
+      <View style={styles.sheetHeaderInfoDetail}>
+        <ScrollView style={styles.ScrollViewS} nestedScrollEnabled={true}>
+          <InfoScan data={props} />
+        </ScrollView>
+      </View>
+    </View>
+  );
+}
+
+const DropDown = (props: any) => {
+
   return (
     <BottomSheetModal
       ref={props.bottomSheetModalRef}
@@ -59,82 +142,7 @@ const DropDown = (props: any) => {
       onChange={props.handleSheetChange}
       enablePanDownToClose={true}
     >
-      <View style={styles.sheetHeader}>
-        <View style={styles.sheetHeaderInfo}>
-          <Image
-            style={styles.image}
-            source={{
-              uri:
-                props.productData?.product?.image_url == null
-                  ? errorImg
-                  : props.productData?.product?.image_url,
-            }}
-          />
-          <View style={styles.productContainer}>
-            <View style={styles.productInfosContainer}>
-              <Text style={styles.productBrand}>
-                {props.productData?.product.brands_tags[0]
-                  ? uppercaseFirstLetter(
-                    props.productData?.product.brands_tags[0]
-                  )
-                  : null}
-              </Text>
-              <Text style={styles.productName}>
-                {props.productData?.product?.product_name_fr
-                  ? uppercaseFirstLetter(
-                    props.productData?.product?.product_name_fr
-                  )
-                  : "Nom inconnu"}
-              </Text>
-            </View>
-            <View style={styles.horizontalContainer}>
-            <View style={{ width: "10%", height: "90%" , marginLeft: -70, marginRight: 40}}>
-                <CircularProgress
-                  value={props.productData.product.ecoscore_score}
-                  activeStrokeWidth={8} // Ajustez la largeur de la progression
-                  radius={23} // Ajustez la taille du cercle de progression
-                  progressValueColor={"black"}
-                  activeStrokeColor={props.productData.product.ecoscore_score < 25
-                  ? "#FF6961"
-                  : props.productData.product.ecoscore_score < 50
-                  ? "#FFA500" 
-                  : "#90EE90"
-                  }
-                  duration={1400}
-                  />
-              </View>
-              <Image style={styles.image_labels} source={imageEcoScore} />
-
-              {label.map((item, index) => {
-                if (item === "fr:triman") {
-                  return (
-                    <Image
-                      key={index}
-                      style={styles.image_labels}
-                      source={require("../../Assets/labels/logo_triman.png")}
-                    />
-                  );
-                } else if (item === "en:green-dot") {
-                  return (
-                    <Image
-                      key={index}
-                      style={styles.image_labels}
-                      source={require("../../Assets/labels/Green_dot.png")}
-                    />
-                  );
-                } else {
-                  return null;
-                }
-              })}
-            </View>
-          </View>
-        </View>
-        <View style={styles.sheetHeaderInfoDetail}>
-          <ScrollView style={styles.ScrollViewS} nestedScrollEnabled={true}>
-            <InfoScan data={props} />
-          </ScrollView>
-        </View>
-      </View>
+      <Infos productData={props.productData} />
     </BottomSheetModal>
   );
 };

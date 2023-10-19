@@ -92,7 +92,7 @@ export const InfoScan = (props: any) => {
                 ? "Jeter dans la poubelle ordinaire"
                 : "Jeter dans la poubelle " + infoProductData}
             </Text>
-            <Text style={{fontWeight: "bold", fontSize: "10px"}}> {"(Cliquez pour plus d'infos)"} </Text>
+            <Text style={{fontWeight: "bold", fontSize: "10px"}}> {!isMessageVisible ? "(Cliquez pour plus d'infos)" : "(Fermer)"} </Text>
 
           </View>
         </TouchableOpacity>
@@ -101,9 +101,9 @@ export const InfoScan = (props: any) => {
       {isMessageVisible && (
         <View
           style={{
-            backgroundColor: "lightgray",
+            backgroundColor: backgroundColorRecyclage,
             padding: 10,
-            borderRadius: 10,
+            width: '100%',
           }}
         >
         <Text>{PackagingText}</Text>
@@ -177,9 +177,7 @@ export const InfoScan = (props: any) => {
 
 const styles = StyleSheet.create({
   textContainer: {
-    marginBottom: "2%",
     padding: "3%",
-    borderRadius: 5,
   },
 
   recyclage: {
@@ -213,10 +211,12 @@ const styles = StyleSheet.create({
     width: 60,
     height: 60,
     marginRight: 10,
+    marginTop: 15
   },
   textCarECarbonne: {
     fontWeight: "bold",
-    fontSize: 20,
+    fontSize: 17,
+    width: '80%',
   },
   Co2ECarbonne: {
     alignItems: "flex-end",
@@ -233,7 +233,7 @@ const styles = StyleSheet.create({
     
   },
   titreEmballage: {
-    fontSize: 20,
+    fontSize: 21,
     fontWeight: "bold",
   },
   imageEmballage: {
@@ -243,7 +243,7 @@ const styles = StyleSheet.create({
   },
   textBouteilleEmballage: {
     fontWeight: "bold",
-    fontSize: 20,
+    fontSize: 18,
   },
   imageEspece: {
     width: 60,

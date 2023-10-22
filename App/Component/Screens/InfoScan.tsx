@@ -92,7 +92,7 @@ export const InfoScan = (props: any) => {
                 ? "Jeter dans la poubelle ordinaire"
                 : "Jeter dans la poubelle " + infoProductData}
             </Text>
-            <Text style={{fontWeight: "bold", fontSize: "10px"}}> {!isMessageVisible ? "(Cliquez pour plus d'infos)" : "(Fermer)"} </Text>
+            <Text style={{fontWeight: "bold", fontSize: 10 }}> {!isMessageVisible ? "(Cliquez pour plus d'infos)" : "(Fermer)"} </Text>
 
           </View>
         </TouchableOpacity>
@@ -109,68 +109,76 @@ export const InfoScan = (props: any) => {
         <Text>{PackagingText}</Text>
         </View>
       )}
-      <View>
-        <View style={styles.textContainer}>
-          <Text style={styles.titreECarbonne}> {"Empreinte Carbone"} </Text>
-          <View style={styles.eCarbonne}>
-            <Image
-              style={[styles.imageECarbonne, { tintColor: colorCarbonne }]}
-              source={require("../../Assets/Car/car.png")}
-            />
-            <Text style={[styles.textCarECarbonne, { color: colorCarbonne }]}>
-              {"Équivaut à parcourir " +
-                (environementImpact / 191.75).toFixed(2) +
-                " km dans \n une voiture à essence"}
-            </Text>
-          </View>
-          <View style={styles.Co2ECarbonne}>
-            <Text style={styles.textCo2ECarbonne}>
-              {environementImpact + "g de CO2 pour 100g de produit"}
-            </Text>
-          </View>
-        </View>
+{environementImpact !== null ? (
+  <View>
+    <View style={styles.textContainer}>
+      <Text style={styles.titreECarbonne}>{"Empreinte Carbone"}</Text>
+      <View style={styles.eCarbonne}>
+        <Image
+          style={[styles.imageECarbonne, { tintColor: colorCarbonne }]}
+          source={require("../../Assets/Car/car.png")}
+        />
+        <Text style={[styles.textCarECarbonne, { color: colorCarbonne }]}>
+          {"Équivaut à parcourir " +
+            (environementImpact / 191.75).toFixed(2) +
+            " km dans \n une voiture à essence"}
+        </Text>
       </View>
+      <View style={styles.Co2ECarbonne}>
+        <Text style={styles.textCo2ECarbonne}>
+          {environementImpact + "g de CO2 pour 100g de produit"}
+        </Text>
+      </View>
+    </View>
+  </View>
+) : null}
+{colorEmballage !== null ? (
+  <View style={styles.Emballage}>
+    <View style={styles.textContainer}>
+      <Text style={styles.titreEmballage}>{"Emballage"}</Text>
       <View style={styles.Emballage}>
-        <View style={styles.textContainer}>
-          <Text style={styles.titreEmballage}> {"Emballage"} </Text>
-          <View style={styles.Emballage}>
-            <Image
-              style={[styles.imageEmballage, { tintColor: colorEmballage }]}
-              source={require("../../Assets/Emballage/emballage.png")}
-            />
-            <Text
-              style={[styles.textBouteilleEmballage, { color: colorEmballage }]}
-            >
-              {"Emballage a " + "faible" + " impact"}
-            </Text>
-          </View>
-        </View>
+        <Image
+          style={[styles.imageEmballage, { tintColor: colorEmballage }]}
+          source={require("../../Assets/Emballage/emballage.png")}
+        />
+        <Text
+          style={[styles.textBouteilleEmballage, { color: colorEmballage }]}
+        >
+          {"Emballage a " + "faible" + " impact"}
+        </Text>
       </View>
+    </View>
+  </View>
+) : null}
 
+
+{EspeceMenace !== null ? (
+  <View style={styles.Emballage}>
+    <View style={styles.textContainer}>
+      <Text style={styles.titreEmballage}>{"Espèces menacées"}</Text>
       <View style={styles.Emballage}>
-        <View style={styles.textContainer}>
-          <Text style={styles.titreEmballage}> {"Espèces menacées"} </Text>
-          <View style={styles.Emballage}>
-            <Image
-              style={[
-                styles.imageECarbonne,
-                { tintColor: EspeceMenace ? "#FF6961" : "#90EE90" },
-              ]}
-              source={require("../../Assets/palm-oil.png")}
-            />
-            <Text
-              style={[
-                styles.textBouteilleEmballage,
-                { color: EspeceMenace ? "#FF6961" : "#90EE90" },
-              ]}
-            >
-              {EspeceMenace
-                ? "Ce produit menace la survie de\n certaines espèces."
-                : "Aucun espece n'est menacé par ce produit"}
-            </Text>
-          </View>
-        </View>
+        <Image
+          style={[
+            styles.imageECarbonne,
+            { tintColor: EspeceMenace ? "#FF6961" : "#90EE90" },
+          ]}
+          source={require("../../Assets/palm-oil.png")}
+        />
+        <Text
+          style={[
+            styles.textBouteilleEmballage,
+            { color: EspeceMenace ? "#FF6961" : "#90EE90" },
+          ]}
+        >
+          {EspeceMenace
+            ? "Ce produit menace la survie de\n certaines espèces."
+            : "Aucune espèce n'est menacée par\n ce produit"}
+        </Text>
       </View>
+    </View>
+  </View>
+) : null}
+
     </>
   );
 };

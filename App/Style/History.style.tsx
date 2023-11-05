@@ -141,5 +141,44 @@ export default StyleSheet.create({
 		height: 90,
 		top: 10,
 		left: 8,
+	},
+	popUp: {
+		position: 'absolute',
+		height: "100%",
+		width: "100%",
+	},
+	popUpBack: {
+		position: 'absolute',
+		height: "100%",
+		width: "100%",
+		backgroundColor: 'rgba(0, 130, 60, .8)',
+	},
+	popUpRetour: {
+		position: 'absolute',
+		height: '100%',
+		width: '100%',
+	},
+	popUpRetourBtn: {
+		position: 'absolute',
+		top: '25%',
+		right: '10%',
+		fontSize: 20,
+		color: 'white',
+	},
+	popUpInfo: {
+		top: "30%",
+		left: "10%",
+		height: "30%",
+		width: "80%",
+		backgroundColor: 'whitesmoke',
+		borderRadius: 5,
+		opacity: 1,
+	},
+	popUpText: {
+		top: "30%",
+		left: "10%",
+		height: "30%",
+		width: "80%",
+		backgroundColor: 'rgba(0, 255, 0, .5)',
 	}
 });

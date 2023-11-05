@@ -7,6 +7,8 @@ import styles from '../../../Style/History.style';
 import { HistoryInfo } from './HistoryInfo';
 import { HistoryList } from './HistoryList';
 
+import { PopUp } from './PopUp';
+
 export const History = () => {
     const [score, setScore] = useState(null);
     const [NbRecyclableItem, setNbRecyclableItem] = useState(0);
@@ -15,21 +17,9 @@ export const History = () => {
     const { getItem } = useAsyncStorage('@localStsorasge1'); // path pour le stockage
     const [value, setValue] = useState(null);
     const takeItemFromStorage = async () => {
-        const fetchData = async () => {
-            const valueTmp = await getItem();
-            console.log("value = "+value);
-            console.log("valueTmp = "+valueTmp);
-            if (valueTmp !== value) {
-                setValue(valueTmp);
-            }
-        };
-
-        fetchData();
+        const valueTmp = await getItem();
+        setValue(valueTmp);
     };
-
-    useEffect(() => { // faudrait que sa se soit lancée a chauque fois que value change mais la sa se lance a chaque fois que le composant et remonté
-        console.log("new >" + value);
-    }, [value]);
 
     useEffect(() => {
         takeItemFromStorage();
@@ -41,7 +31,6 @@ export const History = () => {
         setRefreshing(true);
         takeItemFromStorage();
         setTimeout(() => {
-            ;
             setRefreshing(false);
         }, 1000);
     }, []);
@@ -61,31 +50,34 @@ export const History = () => {
     }
 
     return (
-        <View style={styles.HistoryPage}>
-            <StatusBar animated={true} barStyle={'light-content'} showHideTransition={'fade'} hidden={statusBar} />
-            {showComponentHeader &&
-                <View style={styles.HistoryHeader}>
-                    <Text style={styles.HistoryHeaderText}>
-                        Historique
-                    </Text>
-                </View>
-            }
-            <ScrollView
-                style={styles.History}
-                onScroll={handleScroll}
-                scrollEventThrottle={10}
-                refreshControl={
-                    <RefreshControl
-                        refreshing={refreshing}
-                        onRefresh={onRefresh}
-                        tintColor='rgba(44, 140, 28, 1)'
-                        title="Mise a jour des donnée ♻️"
-                    />
+        <> 
+            <View style={styles.HistoryPage}>
+                <StatusBar animated={true} barStyle={'light-content'} showHideTransition={'fade'} hidden={statusBar} />
+                {showComponentHeader &&
+                    <View style={styles.HistoryHeader}>
+                        <Text style={styles.HistoryHeaderText}>
+                            Historique
+                        </Text>
+                    </View>
                 }
-            >
-                <HistoryInfo value={value} score={score} NbRecyclableItem={NbRecyclableItem} />
-                <HistoryList value={value} setScore={setScore} setNbRecyclableItem={setNbRecyclableItem} />
-            </ScrollView>
-        </View>
+                <ScrollView
+                    style={styles.History}
+                    onScroll={handleScroll}
+                    scrollEventThrottle={10}
+                    refreshControl={
+                        <RefreshControl
+                            refreshing={refreshing}
+                            onRefresh={onRefresh}
+                            tintColor='rgba(44, 140, 28, 1)'
+                            title="Mise a jour des donnée ♻️"
+                        />
+                    }
+                >
+                    <HistoryInfo value={value} score={score} NbRecyclableItem={NbRecyclableItem} />
+                    <HistoryList value={value} setScore={setScore} setNbRecyclableItem={setNbRecyclableItem} />
+                </ScrollView>
+            </View>
+            {true && (<PopUp />) /*Condition pour afficher la PopUp*/}
+        </>
     );
 }

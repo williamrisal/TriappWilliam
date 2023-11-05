@@ -149,9 +149,9 @@ export default StyleSheet.create({
 	},
 	popUpBack: {
 		position: 'absolute',
-		height: "100%",
+		height: "99.4%",
 		width: "100%",
-		backgroundColor: 'rgba(0, 130, 60, .8)',
+		backgroundColor: 'rgba(0, 130, 60, .99)',
 	},
 	popUpRetour: {
 		position: 'absolute',
@@ -175,10 +175,9 @@ export default StyleSheet.create({
 		opacity: 1,
 	},
 	popUpText: {
-		top: "30%",
-		left: "10%",
-		height: "30%",
-		width: "80%",
-		backgroundColor: 'rgba(0, 255, 0, .5)',
+		top: "20%",
+		left: "3%",
+		height: "60%",
+		width: "95%",
 	}
 });

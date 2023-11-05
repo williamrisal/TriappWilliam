@@ -22,6 +22,7 @@
     "json5": "^2.2.3",
     "react-native": "^0.72.3",
     "react-native-circular-progress-indicator": "^4.4.2",
+    "react-native-confetti-cannon": "^1.5.2",
     "react-native-gesture-handler": "~2.8.0",
     "react-native-google-mobile-ads": "^12.3.0",
     "react-native-reanimated": "~2.12.0",

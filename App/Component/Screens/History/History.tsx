@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { View, Text, ScrollView, RefreshControl, StatusBar } from 'react-native';
+import { View, Text, ScrollView, RefreshControl, StatusBar, ImageBackground } from 'react-native';
 import { useAsyncStorage } from '@react-native-async-storage/async-storage';
 
 import styles from '../../../Style/History.style';
@@ -49,8 +49,9 @@ export const History = () => {
         }
     }
 
+    const [popUp, setPopUp] = useState(true);
     return (
-        <> 
+        <>
             <View style={styles.HistoryPage}>
                 <StatusBar animated={true} barStyle={'light-content'} showHideTransition={'fade'} hidden={statusBar} />
                 {showComponentHeader &&
@@ -77,7 +78,7 @@ export const History = () => {
                     <HistoryList value={value} setScore={setScore} setNbRecyclableItem={setNbRecyclableItem} />
                 </ScrollView>
             </View>
-            {true && (<PopUp />) /*Condition pour afficher la PopUp*/}
+            {(popUp) && (<PopUp setPopUp={setPopUp} score={score} />) /*setPopUp(true) pour afficher la PopUp*/}
         </>
     );
 }

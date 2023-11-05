@@ -7,17 +7,33 @@ import styles from '../../../Style/History.style';
 import { HistoryInfo } from './HistoryInfo';
 import { HistoryList } from './HistoryList';
 
-
 export const History = () => {
-	const [score, setScore] = useState(null);
+    const [score, setScore] = useState(null);
     const [NbRecyclableItem, setNbRecyclableItem] = useState(0);
+
     // recuperer se qui et stocker dans asyncStorage
-    const { getItem } = useAsyncStorage('@storage'); // path pour le stockage 
-	const [value, setValue] = useState(null);
-	const takeItemFromStorage = async () => setValue(await getItem());
+    const { getItem } = useAsyncStorage('@localStsorasge1'); // path pour le stockage
+    const [value, setValue] = useState(null);
+    const takeItemFromStorage = async () => {
+        const fetchData = async () => {
+            const valueTmp = await getItem();
+            console.log("value = "+value);
+            console.log("valueTmp = "+valueTmp);
+            if (valueTmp !== value) {
+                setValue(valueTmp);
+            }
+        };
+
+        fetchData();
+    };
+
+    useEffect(() => { // faudrait que sa se soit lancée a chauque fois que value change mais la sa se lance a chaque fois que le composant et remonté
+        console.log("new >" + value);
+    }, [value]);
+
     useEffect(() => {
         takeItemFromStorage();
-    }, [value]);
+    }, []);
 
     // refresh manuel (swipe haut de page)
     const [refreshing, setRefreshing] = useState(false);
@@ -25,6 +41,7 @@ export const History = () => {
         setRefreshing(true);
         takeItemFromStorage();
         setTimeout(() => {
+            ;
             setRefreshing(false);
         }, 1000);
     }, []);
@@ -33,11 +50,11 @@ export const History = () => {
     const [showComponentHeader, setShowComponentHeader] = useState(false);
     const [statusBar, setStatusBar] = useState(true);
     const handleScroll = (event: any) => {
-        if (event.nativeEvent.contentOffset.y < 335) {
+        if (statusBar == false && event.nativeEvent.contentOffset.y < 335) {
             setStatusBar(true);
             setShowComponentHeader(false);
         }
-        if (event.nativeEvent.contentOffset.y > 400) {
+        if (statusBar && event.nativeEvent.contentOffset.y > 400) {
             setStatusBar(false);
             setShowComponentHeader(true);
         }
@@ -66,8 +83,8 @@ export const History = () => {
                     />
                 }
             >
-                <HistoryInfo value={value} score={score} NbRecyclableItem={NbRecyclableItem}/>
-                <HistoryList value={value} setScore={setScore} setNbRecyclableItem={setNbRecyclableItem}/>
+                <HistoryInfo value={value} score={score} NbRecyclableItem={NbRecyclableItem} />
+                <HistoryList value={value} setScore={setScore} setNbRecyclableItem={setNbRecyclableItem} />
             </ScrollView>
         </View>
     );

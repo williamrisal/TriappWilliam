@@ -179,7 +179,7 @@ export const Scan = () => {
       });
   };
 
-  const { getItem, setItem } = useAsyncStorage("@storage");
+  const { getItem, setItem } = useAsyncStorage("@localStsorasge1");
   const setStorageHistory = async (data: any) => {
     const listCodeBarre = await getItem();
     const itemParsed = listCodeBarre?.slice(

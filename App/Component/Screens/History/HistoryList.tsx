@@ -56,7 +56,6 @@ const HistoryListItem = (props: any) => {
 
 	useEffect(() => {
 		getProductInfos(props.codeBarre);
-
 	}, []);
 
 	const getNameCompagny = (data: any) => {
